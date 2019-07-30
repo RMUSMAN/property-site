@@ -1,0 +1,87 @@
+﻿@using WebMatrix.WebData
+
+@{ 
+    
+var message = "";
+    
+ if (IsPost)
+  {
+     
+  var currentPassword = Request["currentPassword"];
+   var Password = Request["Password"]; 
+   var ConfirmPassword = Request["ConfirmPassword"]; 
+   //VALIDATION
+    Validation.RequireFields("currentPassword", "Password", "ConfirmPassword");
+     Validation.Add("Password", Validator.StringLength(16, 6) ); 
+     if (ConfirmPassword != Password) 
+     { 
+         Validation.AddFormError("Sorry passwords do not match");
+          }
+    
+      if (Validation.IsValid()) 
+      {
+           if (WebSecurity.ChangePassword(WebSecurity.CurrentUserName, currentPassword, Password))
+            {
+                 message= "Password has been changed";
+            }
+             else
+              {
+                   Validation.AddFormError("Current password is wrong"); 
+                   } 
+                   } 
+
+  }
+}
+
+
+<!DOCTYPE html>
+
+<title>Manage</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+ <link href="~/css/w3css.css" rel="stylesheet">
+<body class="w3-light-gray">
+
+    <div class="w3-card-4 w3-half w3-white w3-display-middle w3-round ">
+
+<div class="w3-container w3-text-blue w3-orange w3-center">
+  <h2>Change Password</h2>
+</div>
+
+
+      <form class="w3-container w3-padding-16" method="post">
+          <div class="w3-row-padding w3-container">
+              
+           
+   
+              @Html.ValidationSummary(true) 
+          </div>
+
+<p>
+ <input type="password" class="w3-input w3-border w3-round w3-small" name="currentPassword" placeholder="Enter Current Passsword" autocomplete="off" required />
+              @Html.ValidationMessage("currentPassword") 
+ </p>      
+ 
+<p>
+      <input type="password" class="w3-input w3-border w3-round w3-small" name="Password" placeholder="Enter New Passsword" autocomplete="off" required /> 
+       @Html.ValidationMessage("Password")
+          
+</p>
+
+    <p>
+               <input type="password" class="w3-input w3-border w3-round w3-small"  name="ConfirmPassword" placeholder="Confirm Current Passsword" autocomplete="off" required /> 
+      @Html.ValidationMessage("ConfirmPassword") 
+   </p>
+<p>
+
+<a href="~/EditProfile.cshtml" class="w3-btn w3-left w3-round w3-blue">Cancel</a>
+     <input class="w3-right w3-round w3-btn w3-teal" type="submit" value="Change Password"/> 
+ </p>
+</form>
+
+
+
+</div>
+
+
+</body>
+</html>

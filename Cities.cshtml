@@ -1,0 +1,207 @@
+﻿@{
+    
+   var db = Database.Open("starterSite");
+ var city="Select * FROM PROPERTY WHERE ID= @0";
+var data= db.QuerySingle(city , WebSecurity.CurrentUserId);
+
+var lcount="SELECT COUNT(*) FROM PROPERTY WHERE  CITY = 'lahore'";
+var lah= db.QueryValue(lcount , WebSecurity.CurrentUserId);
+var kcount="SELECT COUNT(*) FROM PROPERTY WHERE  CITY = 'karachi'";
+var kar= db.QueryValue(kcount , WebSecurity.CurrentUserId);
+var kah="SELECT COUNT(*) FROM PROPERTY WHERE CITY = 'islamabad'";
+var isl= db.QueryValue(kah , WebSecurity.CurrentUserId);
+
+var pcount="SELECT COUNT(*) FROM PROPERTY WHERE  CITY = 'peshawar'";
+var pes= db.QueryValue(pcount , WebSecurity.CurrentUserId);
+var fcount="SELECT COUNT(*) FROM PROPERTY WHERE  CITY = 'faisalabad'";
+var fas= db.QueryValue(fcount , WebSecurity.CurrentUserId);
+var qcount="SELECT COUNT(*) FROM PROPERTY WHERE CITY = 'quetta'";
+var que= db.QueryValue(qcount , WebSecurity.CurrentUserId);
+
+
+var mcount="SELECT COUNT(*) FROM PROPERTY WHERE  CITY = 'multan'";
+var mul= db.QueryValue(mcount , WebSecurity.CurrentUserId);
+var rcount="SELECT COUNT(*) FROM PROPERTY WHERE  CITY = 'rawalpindi'";
+var raw= db.QueryValue(rcount , WebSecurity.CurrentUserId);
+var bcount="SELECT COUNT(*) FROM PROPERTY WHERE CITY = 'bahawalpur'";
+var bah= db.QueryValue(bcount , WebSecurity.CurrentUserId);
+
+var scount="SELECT COUNT(*) FROM PROPERTY WHERE CITY = 'sialkot'";
+var sia= db.QueryValue(scount , WebSecurity.CurrentUserId);
+
+
+
+}
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title></title>
+
+        <style>
+#City-Scroll::-webkit-scrollbar {
+display: none;
+}
+    #Cities_ul{
+ 
+  margin-bottom:20px;
+  margin-top:3px;
+  
+  
+}
+
+         #Cities_ul li  { 
+        display: inline-block;
+         width: 47%;
+                height: 140px;
+               
+                 
+                  
+                  margin-left:2px;
+                  margin-top:4px; 
+                  background-color: #fff; } 
+
+           
+            
+            
+
+</style>
+    </head>
+    <body>
+
+
+
+
+        <form id="CityForm" action="~/CityLayout.cshtml" method="get">
+
+<div class=" w3-small w3-card-4 w3-light-grey" style="padding: 4px">
+<div class="w3-row " style=" height:30px; margin-bottom: 4px">
+  <div class="w3-col w3-text-green " style="width:40px; margin-left:5px; margin-right:10px;"><i class="w3-xlarge fa fa-map-marker"></i></div>
+    <div class="w3-rest">
+     <h3 class="w3-small w3-text-blue w3-left" style="height: 50px; margin-top:2px;"><b>Top 10 Cities of Pakistan </b></h3>
+         </div>
+</div>
+
+    <div id="City-Scroll"  class="coverCity w3-small w3-card-4 w3-round w3-topbar w3-border-light-grey w3-white" style="overflow-y: scroll; overflow-x: hidden ; width:100%; height: 425px; ">
+        <ul id="Cities_ul" class=" w3-card-4 w3-light-grey ">
+            <li class="w3-center w3-hover-shadow " value="lahore">
+<img class="properties" src="~/images/Lahore.jpg" alt="property" style="width: 100%; height: 80%">
+                <label class="w3-left w3-small " style="margin-left: 10px"><strong>Lahore</strong></label> 
+                <label class="w3-center w3-small" style="margin-left: 10px">@lah</label>
+           </li>
+               <li class="w3-center w3-hover-shadow " value="karachi" >
+<img class="properties" src="~/images/Karachi.jpg" alt="property" style="width: 100%; height: 80%">
+                   <label class="w3-center w3-small"><strong>Karachi</strong></label>
+                     <label class="w3-center w3-small" style="margin-left: 10px">@kar</label>
+               </li>  
+                 <li class="w3-center w3-hover-shadow" value="islamabad" >
+<img class="properties" src="~/images/islamabad.jpg" alt="property" style="width: 100%; height: 80%">
+           <label class="w3-left w3-small " style="margin-left: 10px"><strong>Islamabad</strong></label> 
+                <label class="w3-center w3-small" style="margin-left: 10px">@isl</label>
+
+
+        </li>   
+            <li class="w3-center w3-hover-shadow" value="multan" >
+               <img class="properties" src="~/images/Multan.jpg" alt="property" style="width: 100%; height: 80%">
+         <label class="w3-left w3-small " style="margin-left: 10px"><strong>Multan</strong></label> 
+                <label class="w3-center w3-small" style="margin-left: 10px">@mul</label> 
+                </li>
+              <li class="w3-center w3-hover-shadow" value="peshawar">
+<img class="properties" src="~/images/Pishawar.jpg" alt="property" style="width: 100%; height: 80%">
+                  <label class="w3-left w3-small " style="margin-left: 10px"><strong>Peshawar</strong></label> 
+                <label class="w3-center w3-small" style="margin-left: 10px">@pes</label>
+         
+           </li>
+               <li class="w3-center w3-hover-shadow" value="faisalabad" >
+<img class="properties" src="~/images/Faislabad.jpg" alt="property" style="width: 100%; height: 80%">
+            <label class="w3-left w3-small " style="margin-left: 10px"><strong>Faisalabad</strong></label> 
+                <label class="w3-center w3-small" style="margin-left: 10px">@fas</label>
+         
+               </li>  
+            
+            
+             <li class="w3-center w3-hover-shadow" value="bahawalpur" >
+<img class="properties" src="~/images/Bahawalpur.jpg" alt="property" style="width: 100%; height: 80%">
+           <label class="w3-left w3-small " style="margin-left: 10px"><strong>Bahawalpur</strong></label> 
+                <label class="w3-center w3-small" style="margin-left: 10px">@bah</label>
+         
+        </li>  
+             <li class="w3-center w3-hover-shadow" value="quetta">
+<img class="properties" src="~/images/Quetta.jpg" alt="property" style="width: 100%; height: 80%">
+      <label class="w3-left w3-small " style="margin-left: 10px"><strong>Quetta</strong></label> 
+                <label class="w3-center w3-small" style="margin-left: 10px">@que</label>
+         
+               </li>
+             <li class="w3-center w3-hover-shadow" value="sialkot" >
+<img class="properties" src="~/images/Faislabad.jpg" alt="property" style="width: 100%; height: 80%">
+      <label class="w3-left w3-small " style="margin-left: 10px"><strong>Sialkot</strong></label> 
+                <label class="w3-center w3-small" style="margin-left: 10px">@sia</label>
+         
+               </li>
+               <li class="w3-center w3-hover-shadow" value="rawalpindi">
+<img class="properties" src="~/images/Quetta.jpg" alt="property" style="width: 100%; height: 80%">
+      <label class="w3-left w3-small " style="margin-left: 10px"><strong>Rawalpindi</strong></label> 
+                <label class="w3-center w3-small" style="margin-left: 10px">@raw</label>
+         
+               </li>
+              
+
+</ul>
+            </div>
+     
+     <div class="w3-container w3-blue  w3-xlarge w3-center">
+      <div class="w3-left" id="Cities_upClick"><i class="fa fa-arrow-circle-up w3-hover-text-red"></i></div>
+      <div class="w3-right" id="Cities_downClick"><i class="fa fa-arrow-circle-down w3-hover-text-red"></i></div>
+    
+</div>
+    </div> 
+     
+
+<input id="cityName" type="hidden" value="" name="city">
+            </form>
+
+
+    <script>
+
+    var scrolled=0;
+$(document).ready(function(){
+      
+      $("#Cities_ul li").click(function () {
+            var sellId = $("#cityName").val($(this).attr("value"));
+            $("#CityForm").submit();
+});
+
+       $("#Cities_downClick").on("click" ,function(){
+                scrolled=scrolled+200;
+        
+				$(".coverCity").animate({
+				        scrollTop:  scrolled
+				   });
+
+			});
+
+    
+    $("#Cities_upClick").on("click" ,function(){
+				scrolled=scrolled-200;
+				
+				$(".coverCity").animate({
+				        scrollTop:  scrolled
+				   });
+
+			});
+
+
+
+
+});
+
+
+     </script>
+
+
+
+    </body>
+</html>

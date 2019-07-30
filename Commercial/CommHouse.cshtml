@@ -1,0 +1,668 @@
+﻿@{
+  WebSecurity.RequireAuthenticatedUser();    
+
+    Layout = "~/_PostProperty.cshtml";
+    Page.Title = "Commercial House";
+     var db=Database.Open("StarterSite");
+    var select_sql="SELECT * FROM CITIES ";
+
+
+    var sql="Select * FROM UserProfile WHERE UserId= @0";
+
+  var row= db.QuerySingle(sql , WebSecurity.CurrentUserId);
+
+var autoid=db.QueryValue("SELECT MAX(ID) FROM PROPERTY");
+var auto=++autoid;
+var type="House";    
+var name=Request["name"];
+var city=Request["city"];
+var location=Request["location"];
+var price=Request["price"];
+var year=Request["year"];
+var area=Request["area"];
+var description=Request["description"];
+var bedroom=Request["bedroom"];
+var bathroom=Request["bathroom"];
+var storeroom=Request["storeroom"];
+var kitchen=Request["kitchen"];
+var carparking=Request["carparking"];
+var owner=Request["owner"];
+var id=Request["id"];
+var email=Request["email"];
+var contact=Request["contact"];
+var mode="unfeatured";
+var purpose="Commercial";
+var title="Commercial Houses in" + city;
+var state="deactive";
+WebImage photo = null;
+WebImage photo1 = null;
+WebImage photo2 = null;
+WebImage photo3 = null;
+WebImage photo4 = null;
+WebImage photo5 = null;
+WebImage photo6 = null;
+WebImage photo7 = null;
+WebImage photo8 = null;
+WebImage photo9 = null;
+WebImage photo10 = null;
+WebImage photo11 = null;
+WebImage photo12 = null;
+var path = "";
+var path1 = "";
+var path2 = "";
+var path3 = "";
+var path4 = "";
+var path5 = "";
+var path6 = "";
+var path7 = "";
+var path8 = "";
+var path9 = "";
+var path10 = "";
+var path11 = "";
+var path12 = "";
+
+
+
+if(IsPost)
+{
+    name=Request.Form["name"];
+    city=Request.Form["city"];
+    location=Request.Form["location"];
+     price=Request.Form["price"];
+     year=Request.Form["year"]; 
+    description=Request.Form["description"];
+    area=Request.Form["area"];
+     bedroom=Request.Form["bedroom"];
+     bathroom=Request.Form["bathroom"];
+     storeroom=Request.Form["storeroom"];
+     kitchen=Request.Form["kitchen"];
+     carparking=Request.Form["carparking"];
+     owner=Request.Form["owner"];
+    id=Request.Form["id"];
+    email=Request.Form["email"];
+    contact=Request.Form["contact"];
+
+      photo = WebImage.GetImageFromRequest("mainimg");
+        if(photo != null)
+        {
+           var  newFileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(photo.FileName);
+            path = @"Upload_Pics\" + newFileName;
+             photo.Save(@"~\" + path);
+        }
+        else
+        {
+            path = "images/no.png";
+        }
+
+         photo1 = WebImage.GetImageFromRequest("imgupload1");
+        if(photo1 != null)
+        {
+           var  newFileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(photo1.FileName);
+            path1 = @"Upload_Pics\" + newFileName;
+             photo1.Save(@"~\" + path1);
+        }
+           else
+        {
+            path1 = "images/back.png";
+        }
+         photo2 = WebImage.GetImageFromRequest("imgupload2");
+        if(photo2 != null)
+        {
+           var  newFileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(photo2.FileName);
+            path2 = @"Upload_Pics\" + newFileName;
+             photo2.Save(@"~\" + path2);
+        }
+        else
+        {
+            path2 = "images/back.png";
+        }
+         photo3 = WebImage.GetImageFromRequest("imgupload3");
+        if(photo3 != null)
+        {
+           var  newFileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(photo3.FileName);
+            path3 = @"Upload_Pics\" + newFileName;
+             photo3.Save(@"~\" + path3);
+        }
+          else
+        {
+            path3 = "images/back.png";
+        }
+         photo4 = WebImage.GetImageFromRequest("imgupload4");
+        if(photo4 != null)
+        {
+           var  newFileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(photo4.FileName);
+            path4 = @"Upload_Pics\" + newFileName;
+             photo4.Save(@"~\" + path4);
+        }
+         else
+        {
+            path4 = "images/back.png";
+        }
+         photo5 = WebImage.GetImageFromRequest("imgupload5");
+        if(photo5 != null)
+        {
+           var  newFileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(photo5.FileName);
+            path5 = @"Upload_Pics\" + newFileName;
+             photo.Save(@"~\" + path5);
+        }
+         else
+        {
+            path5 = "images/back.png";
+        }
+         photo6 = WebImage.GetImageFromRequest("imgupload6");
+        if(photo6 != null)
+        {
+           var  newFileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(photo6.FileName);
+            path6 = @"Upload_Pics\" + newFileName;
+             photo6.Save(@"~\" + path6);
+        }
+         else
+        {
+            path6 = "images/back.png";
+        }
+         photo7 = WebImage.GetImageFromRequest("imgupload7");
+        if(photo7 != null)
+        {
+           var  newFileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(photo7.FileName);
+            path7 = @"Upload_Pics\" + newFileName;
+             photo7.Save(@"~\" + path7);
+        }
+         else
+        {
+            path7 = "images/back.png";
+        }
+         photo8 = WebImage.GetImageFromRequest("imgupload8");
+        if(photo8 != null)
+        {
+           var  newFileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(photo8.FileName);
+            path8 = @"Upload_Pics\" + newFileName;
+             photo8.Save(@"~\" + path8);
+        }
+         else
+        {
+            path8 = "images/back.png";
+        }
+         photo9 = WebImage.GetImageFromRequest("imgupload9");
+        if(photo9 != null)
+        {
+           var  newFileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(photo9.FileName);
+            path9 = @"Upload_Pics\" + newFileName;
+             photo9.Save(@"~\" + path9);
+        }
+         else
+        {
+            path9 = "images/back.png";
+        }
+         photo10 = WebImage.GetImageFromRequest("imgupload10");
+        if(photo10 != null)
+        {
+           var  newFileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(photo10.FileName);
+            path10 = @"Upload_Pics\" + newFileName;
+             photo10.Save(@"~\" + path10);
+        }
+         else
+        {
+            path10 = "images/back.png";
+        }
+         photo11 = WebImage.GetImageFromRequest("imgupload11");
+        if(photo11 != null)
+        {
+           var  newFileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(photo11.FileName);
+            path11 = @"Upload_Pics\" + newFileName;
+             photo11.Save(@"~\" + path11);
+        }
+         else
+        {
+            path11 = "images/back.png";
+        }
+        photo12 = WebImage.GetImageFromRequest("imgupload12");
+        if(photo12 != null)
+        {
+           var  newFileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(photo12.FileName);
+            path12 = @"Upload_Pics\" + newFileName;
+             photo12.Save(@"~\" + path12);
+        }
+         else
+        {
+            path12 = "images/back.png";
+        }
+    string sqlp="INSERT INTO PROPERTY(USERID,TYPE , NAME , CITY , LOCATION , PRICE , YEAR , DESCRIPTION , AREA , BEDROOMS , BATHROOMS , STOREROOMS , KITCHENS , CARPARKING , OWNER  , KHAALI_ID , EMAIL , CONTACT , MIMG , IMG1 , IMG2 , IMG3 , IMG4, IMG5 , IMG6 , IMG7 , IMG8 , IMG9 , IMG10 , IMG11 , IMG12 , MODE , PURPOSE , TITLE , STATE) VALUES(@0, @1, @2, @3 , @4, @5, @6, @7, @8, @9 ,@10 ,@11 ,@12 ,@13 ,@14 ,@15 ,@16 , @17 ,@18 ,@19, @20 , @21 , @22 , @23 , @24 , @25 , @26 , @27 , @28, @29 , @30, @31, @32 , @33 , @34 )";
+    db.Execute(sqlp , WebSecurity.CurrentUserId ,type , name , city , location , price , year , description , area , bedroom , bathroom , storeroom , kitchen , carparking , owner , id , email , contact , path , path1 , path2 , path3 , path4 , path5 , path6 ,path7 , path8 ,path9 , path10 , path11 , path12 ,mode, purpose ,title , state );
+       
+}
+
+
+}
+
+<!DOCTYPE html>
+
+<title>W3.CSS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+   <script src="~/js/forms.js"></script>
+  
+<style>
+div.cover:hover{
+opacity:.7;
+}
+.upload{
+display:none;
+}
+div.cover:hover .upload{
+display:block;
+
+}
+   .w3-table
+    {
+       margin-left: -8px; 
+    }
+    
+    
+</style>
+
+
+<body >
+
+<form id="HouseT" class="w3-text-blue-gray" action="" enctype="multipart/form-data" method="post">
+
+<div class="w3-bar w3-border w3-teal w3-center w3-small w3-padding">
+  <a href="#" style="width:33%" class="w3-bar-item w3-button w3-mobile">Purpose-For Commercial </a>
+  <a href="#" style="width:33%" class="w3-bar-item w3-button w3-mobile">Property Type-House</a>
+ <a href="#" style="width:33%" class="w3-bar-item w3-button w3-mobile">Property ID- @auto</a>
+</div>
+<div class="w3-row w3-bottombar w3-border-blue w3-light-gray" style="width:100%; height:850px; margin-top:5px">
+<div class="w3-half w3-center" style="width:45%;">
+
+<div class="w3-containe w3-center w3-white " style="overflow-y:scroll; overflow-x:hidden; width:100%; height:750px;">
+    
+    <table class="w3-table" style="">
+        <tr class="w3-center">
+        <h2 class="w3-text-blue"><b>Upload Images</b></h2>
+        </tr>
+
+<tr>
+    <td> 
+   <div id="cover" class="cover w3-display-container  w3-gray w3-center" style="width:150px; Height:100px">
+<img id="imge1" class="w3-img" src="~/photos/1.png" alt="Property Images" title="Outside image of house" style="width:100%; Height:100px;">
+<h2 class="upload w3-text-light-gray w3-display-middle">
+<label for="imgupload1" class="w3-large w3-button w3-red we-text-white" title="Upload image" ><i class="fa fa-cloud-upload w3-xxlarge" ></i></label>
+<input type="file" id="imgupload1" name="imgupload1" class="w3-hide"  onchange="document.getElementById('imge1').src = window.URL.createObjectURL(this.files[0])">
+</h2></div>
+    </td>
+     <td>
+     <div id="cover" class="cover w3-display-container  w3-gray w3-center" style="width:150px; Height:100px">
+<img id="imge2" class="w3-img" src="~/photos/2.png" alt="Property Images" title="Outside image of house" style="width:100%; Height:100px;">
+<h2 class="upload w3-text-light-gray w3-display-middle">
+<label for="imgupload2" class="w3-large w3-button w3-red we-text-white" title="Upload image" ><i class="fa fa-cloud-upload w3-xxlarge" ></i></label>
+<input type="file" id="imgupload2" name="imgupload2" class="w3-hide"  onchange="document.getElementById('imge2').src = window.URL.createObjectURL(this.files[0])">
+</h2></div>
+     </td>
+</tr>
+
+
+        <tr>
+    <td> 
+   <div id="cover" class="cover w3-display-container  w3-gray w3-center" style="width:150px; Height:100px">
+<img id="imge3" class="w3-img" src="~/photos/3.png" alt="Property Images" title="Outside image of house" style="width:100%; Height:100px;">
+<h2 class="upload w3-text-light-gray w3-display-middle">
+<label for="imgupload3" class="w3-large w3-button w3-red we-text-white" title="Upload image" ><i class="fa fa-cloud-upload w3-xxlarge" ></i></label>
+<input type="file" id="imgupload3" name="imgupload3" class="w3-hide"  onchange="document.getElementById('imge3').src = window.URL.createObjectURL(this.files[0])">
+</h2></div>
+    </td>
+     <td>
+     <div id="cover" class="cover w3-display-container  w3-gray w3-center" style="width:150px; Height:100px">
+<img id="imge4" class="w3-img" src="~/photos/4.png" alt="Property Images" title="Outside image of house" style="width:100%; Height:100px;">
+<h2 class="upload w3-text-light-gray w3-display-middle">
+<label for="imgupload4" class="w3-large w3-button w3-red we-text-white" title="Upload image" ><i class="fa fa-cloud-upload w3-xxlarge" ></i></label>
+<input type="file" id="imgupload4" name="imgupload4" class="w3-hide"  onchange="document.getElementById('imge4').src = window.URL.createObjectURL(this.files[0])">
+</h2></div>
+     </td>
+</tr>
+        <tr>
+    <td> 
+   <div id="cover" class="cover w3-display-container  w3-gray w3-center" style="width:150px; Height:100px">
+<img id="imge5" class="w3-img" src="~/photos/5.png" alt="Property Images" title="Outside image of house" style="width:100%; Height:100px;">
+<h2 class="upload w3-text-light-gray w3-display-middle">
+<label for="imgupload5" class="w3-large w3-button w3-red we-text-white" title="Upload image" ><i class="fa fa-cloud-upload w3-xxlarge" ></i></label>
+<input type="file" id="imgupload5" name="imgupload5" class="w3-hide"  onchange="document.getElementById('imge5').src = window.URL.createObjectURL(this.files[0])">
+</h2></div>
+    </td>
+     <td>
+     <div id="cover" class="cover w3-display-container  w3-gray w3-center" style="width:150px; Height:100px">
+<img id="imge6" class="w3-img" src="~/photos/6.png" alt="Property Images" title="Outside image of house" style="width:100%; Height:100px;">
+<h2 class="upload w3-text-light-gray w3-display-middle">
+<label for="imgupload6" class="w3-large w3-button w3-red we-text-white" title="Upload image" ><i class="fa fa-cloud-upload w3-xxlarge" ></i></label>
+<input type="file" id="imgupload6" name="imgupload6" class="w3-hide"  onchange="document.getElementById('imge6').src = window.URL.createObjectURL(this.files[0])">
+</h2></div>
+     </td>
+</tr>
+        <tr>
+    <td> 
+   <div id="cover" class="cover w3-display-container  w3-gray w3-center" style="width:150px; Height:100px">
+<img id="imge7" class="w3-img" src="~/photos/7.png" alt="Property Images" title="Outside image of house" style="width:100%; Height:100px;">
+<h2 class="upload w3-text-light-gray w3-display-middle">
+<label for="imgupload7" class="w3-large w3-button w3-red we-text-white" title="Upload image" ><i class="fa fa-cloud-upload w3-xxlarge" ></i></label>
+<input type="file" id="imgupload7" name="imgupload7" class="w3-hide"  onchange="document.getElementById('imge7').src = window.URL.createObjectURL(this.files[0])">
+</h2></div>
+    </td>
+     <td>
+     <div id="cover" class="cover w3-display-container  w3-gray w3-center" style="width:150px; Height:100px">
+<img id="imge8" class="w3-img" src="~/photos/8.png" alt="Property Images" title="Outside image of house" style="width:100%; Height:100px;">
+<h2 class="upload w3-text-light-gray w3-display-middle">
+<label for="imgupload8" class="w3-large w3-button w3-red we-text-white" title="Upload image" ><i class="fa fa-cloud-upload w3-xxlarge" ></i></label>
+<input type="file" id="imgupload8" name="imgupload8" class="w3-hide"  onchange="document.getElementById('imge8').src = window.URL.createObjectURL(this.files[0])">
+</h2></div>
+     </td>
+</tr>
+        <tr>
+    <td> 
+   <div id="cover" class="cover w3-display-container  w3-gray w3-center" style="width:150px; Height:100px">
+<img id="imge9" class="w3-img" src="~/photos/9.png" alt="Property Images" title="Outside image of house" style="width:100%; Height:100px;">
+<h2 class="upload w3-text-light-gray w3-display-middle">
+<label for="imgupload9" class="w3-large w3-button w3-red we-text-white" title="Upload image" ><i class="fa fa-cloud-upload w3-xxlarge" ></i></label>
+<input type="file" id="imgupload9" name="imgupload9" class="w3-hide"  onchange="document.getElementById('imge9').src = window.URL.createObjectURL(this.files[0])">
+</h2></div>
+    </td>
+     <td>
+     <div id="cover" class="cover w3-display-container  w3-gray w3-center" style="width:150px; Height:100px">
+<img id="imge10" class="w3-img" src="~/photos/10.png" alt="Property Images" title="Outside image of house" style="width:100%; Height:100px;">
+<h2 class="upload w3-text-light-gray w3-display-middle">
+<label for="imgupload10" class="w3-large w3-button w3-red we-text-white" title="Upload image" ><i class="fa fa-cloud-upload w3-xxlarge" ></i></label>
+<input type="file" id="imgupload10" name="imgupload10" class="w3-hide"  onchange="document.getElementById('imge10').src = window.URL.createObjectURL(this.files[0])">
+</h2></div>
+     </td>
+</tr>
+        <tr>
+    <td> 
+   <div id="cover" class="cover w3-display-container  w3-gray w3-center" style="width:150px; Height:100px">
+<img id="imge11" class="w3-img" src="~/photos/1.png" alt="Property Images" title="Outside image of house" style="width:100%; Height:100px;">
+<h2 class="upload w3-text-light-gray w3-display-middle">
+<label for="imgupload11" class="w3-large w3-button w3-red we-text-white" title="Upload image" ><i class="fa fa-cloud-upload w3-xxlarge" ></i></label>
+<input type="file" id="imgupload11" name="imgupload11" class="w3-hide"  onchange="document.getElementById('imge11').src = window.URL.createObjectURL(this.files[0])">
+</h2></div>
+    </td>
+     <td>
+     <div id="cover" class="cover w3-display-container  w3-gray w3-center" style="width:150px; Height:100px">
+<img id="imge12" class="w3-img" src="~/photos/1.png" alt="Property Images" title="Outside image of house" style="width:100%; Height:100px;">
+<h2 class="upload w3-text-light-gray w3-display-middle">
+<label for="imgupload12" class="w3-large w3-button w3-red we-text-white" title="Upload image" ><i class="fa fa-cloud-upload w3-xxlarge" ></i></label>
+<input type="file" id="imgupload12" name="imgupload12" class="w3-hide"  onchange="document.getElementById('imge12').src = window.URL.createObjectURL(this.files[0])">
+</h2></div>
+     </td>
+</tr>
+        </table>
+
+
+</div>
+
+ 
+</div>
+<div class="w3-half  w3-small" style="width:54%; margin-right: 5px;">
+<div id="cover" class="cover w3-display-container w3-gray w3-center" style="width:100%; Height:200px">
+<img id="covimg" class="w3-img" src="~/photos/cover.png" alt="Property Images" title="Outside image of house" style="width:100%; Height:200px;">
+<h2 class="upload w3-text-light-gray w3-display-middle">
+<label for="mainimg" class="w3-large w3-button w3-red we-text-white" title="Upload image" ><i class="fa fa-cloud-upload w3-xxlarge" ></i></label>
+
+<input type="file" id="mainimg"  name="mainimg" class="w3-hide"  onchange="document.getElementById('covimg').src = window.URL.createObjectURL(this.files[0])" title="Upload outside Image of Property" >
+</h2></div>
+ <h5 class="w3-text-blue w3-small"><b>Property Basic Details</b></h5>
+<input type="text" name="name" class="w3-input w3-border w3-round  w3-card" type="text" placeholder="Name of property(optional)"  pattern="^\s*[A-Za-z0-9]+(?:\s+[A-Za-z0-9]+)*\s*$" title="Only characters and numbers are are allowed" maxlength="30" style="margin-bottom:8px" >
+<div class="w3-row-padding" style="margin-left:-14px; margin-right:-8px" >
+  <div class="w3-half w3-left" style="width:40%">
+    
+  <select id="city" class="w3-select w3-border w3-round  w3-card" name="city" style="margin-bottom:8px" required>
+    <option value="" disabled selected>Select City</option>
+  @foreach(var cit in db.Query(select_sql))
+{
+       <option value="@cit.NAME">@cit.NAME</option>
+}      
+  </select>
+  
+<input id="in" type="number" name="price" class="w3-input w3-border w3-round w3-card" type="text" min="100000" placeholder="Enter Price in PKR" onkeyup="word.innerHTML=convertNumberToWords(this.value)"  required>
+<div  id="word" class="w3-card-4 w3-quarter w3-small w3-teal w3-text-white w3-border w3-round " style=" position:absolute; display:none"></div>
+</div>
+  <div class="w3-w3-half w3-right" style="width:60%">
+ <input id="locat" class="w3-input w3-border w3-round w3-card" name="location" list="loc" placeholder="Select Location otherwise enter" style="margin-bottom:8px" autocomplete="off" required>
+<datalist id="loc">  
+    <option value="" disabled selected>Select location</option>
+</datalist>
+ <select class="w3-select w3-border w3-round w3-card"  name="year"  style="margin-bottom:8px"  required>
+    <option value="" disabled selected>Select Consrtuction Year</option>
+    <option value="2000">2000</option>
+    <option value="2001">2001</option>
+    <option value="2002">2002</option>
+    <option value="2003">2003</option>
+    <option value="2004">2004</option>
+    <option value="2005">2005</option>
+    <option value="2006">2006</option>
+    <option value="2007">2007</option>
+    <option value="2008">2008</option>
+    <option value="2009">2009</option>
+    <option value="2010">2010</option>
+    <option value="2011">2011</option>
+    <option value="2012">2012</option>
+    <option value="2013">2013</option>
+    <option value="2014">2014</option>
+    <option value="2015">2015</option>
+    <option value="2016">2016</option>
+    <option value="2017">2017</option>
+    <option value="2018">2018</option>
+  </select>
+  </div>
+ 
+</div>
+
+ <textarea  name="description" class="w3-input w3-border w3-round w3-card " placeholder="Property Description(optional)" style="width:100%" ></textarea>
+  <h5 class="w3-text-blue w3-small"><b>More Details</b></h5>
+ <div class="w3-row-padding" style="margin-left:-14px; margin-right:-8px" >
+  <div class="w3-half w3-left" style="width:50%">
+    
+   <input type="text" class="w3-input w3-border w3-round w3-card" list="browsers" placeholder="Area/Size"name="area" style="margin-bottom:8px" required>
+<datalist id="browsers"> 
+  <option value="10 marla">
+  <option value="30 marla">
+  <option value="2 canal">
+  <option value="4 canal">
+  <option value="5 canal">
+  <option value="3000 sq.ft">
+  <option value="1 acre">
+ 
+</datalist>
+  
+<select class="w3-select w3-border w3-round w3-card" name="bathroom" style="margin-bottom:8px" required>
+    <option value="" disabled selected>Bathrooms</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="9+">9+</option>
+  </select>
+ <select class="w3-select w3-border w3-round w3-card"  name="storeroom" style="margin-bottom:8px" required>
+    <option value="" disabled selected>Store Rooms</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="9+">9+</option>
+  </select>
+
+</div>
+  <div class="w3-w3-half w3-right" style="width:50%">
+    
+<select class="w3-select w3-border w3-round w3-card"  name="bedroom" style="margin-bottom:8px" required>
+    <option value="" disabled selected>Bedrooms</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="9+">9+</option>
+  </select>
+   
+<select class="w3-select w3-border w3-round w3-card"  name="kitchen" style="margin-bottom:8px" required>
+    <option value="" disabled selected>Kitchens</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="9+">9+</option>
+  </select>
+    
+<select class="w3-select w3-border w3-round w3-card"  name="carparking" style="margin-bottom:8px" required>
+    <option value="" disabled selected>Car Parking</option>
+      <option value="1">0</option>
+     <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="3">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="9+">9+</option>
+  </select>
+  </div>
+ </div>
+ 
+  <h5 class="w3-text-blue w3-small"><b>Property Owner Details</b></h5>
+  <div class="w3-row-padding" style="margin-left:-14px; margin-right:-8px">
+  <div class="w3-half w3-left" style="width:50%">
+    <input type="text" class="w3-input w3-border w3-round w3-card" type="text" name="owner" value="@row.Name" placeholder="Owner Name auto" style="margin-bottom:8px" readonly="" >
+
+</div>
+  <div class="w3-w3-half w3-right" style="width:50%">
+  <input class="w3-input w3-border w3-round w3-card" type="text" name="id" value="@auto" placeholder="Property ID auto" style="margin-bottom:8px" readonly="">
+ 
+  </div>
+ 
+</div>
+ <input type="email" class="w3-input w3-border w3-round w3-card" name="email" type="text" value="@row.Email" placeholder="Email Address" style="margin-bottom:8px" readonly="">
+  <input type="number" class="w3-input w3-border w3-round w3-card" name="contact" type="text" value="@row.Phone" placeholder="Contact No" style="margin-bottom:8px" maxlength="12" readonly="">
+</div>
+<input type="submit" class=" w3-button w3-right  w3-margin-top w3-teal w3-margin-bottom w3-margin-right w3-card" value="submit" title="sumit">
+</div>
+
+    </form>
+    
+
+
+
+    <script>
+             
+   $("#in").focusin(function() {
+  $('#word').show();
+    });
+$("#in").focusout(function() {
+        $('#word').hide();
+    });
+   
+
+
+         function convertNumberToWords(amount) {
+    var words = new Array();
+    words[0] = '';
+    words[1] = 'One';
+    words[2] = 'Two';
+    words[3] = 'Three';
+    words[4] = 'Four';
+    words[5] = 'Five';
+    words[6] = 'Six';
+    words[7] = 'Seven';
+    words[8] = 'Eight';
+    words[9] = 'Nine';
+    words[10] = 'Ten';
+    words[11] = 'Eleven';
+    words[12] = 'Twelve';
+    words[13] = 'Thirteen';
+    words[14] = 'Fourteen';
+    words[15] = 'Fifteen';
+    words[16] = 'Sixteen';
+    words[17] = 'Seventeen';
+    words[18] = 'Eighteen';
+    words[19] = 'Nineteen';
+    words[20] = 'Twenty';
+    words[30] = 'Thirty';
+    words[40] = 'Forty';
+    words[50] = 'Fifty';
+    words[60] = 'Sixty';
+    words[70] = 'Seventy';
+    words[80] = 'Eighty';
+    words[90] = 'Ninety';
+    amount = amount.toString();
+    var atemp = amount.split(".");
+    var number = atemp[0].split(",").join("");
+    var n_length = number.length;
+    var words_string = "";
+    if (n_length <= 9) {
+        var n_array = new Array(0, 0, 0, 0, 0, 0, 0, 0, 0);
+        var received_n_array = new Array();
+        for (var i = 0; i < n_length; i++) {
+            received_n_array[i] = number.substr(i, 1);
+        }
+        for (var i = 9 - n_length, j = 0; i < 9; i++, j++) {
+            n_array[i] = received_n_array[j];
+        }
+        for (var i = 0, j = 1; i < 9; i++, j++) {
+            if (i == 0 || i == 2 || i == 4 || i == 7) {
+                if (n_array[i] == 1) {
+                    n_array[j] = 10 + parseInt(n_array[j]);
+                    n_array[i] = 0;
+                }
+            }
+        }
+        value = "";
+        for (var i = 0; i < 9; i++) {
+            if (i == 0 || i == 2 || i == 4 || i == 7) {
+                value = n_array[i] * 10;
+            } else {
+                value = n_array[i];
+            }
+            if (value != 0) {
+                words_string += words[value] + " ";
+            }
+            if ((i == 1 && value != 0) || (i == 0 && value != 0 && n_array[i + 1] == 0)) {
+                words_string += "Crores ";
+            }
+            if ((i == 3 && value != 0) || (i == 2 && value != 0 && n_array[i + 1] == 0)) {
+                words_string += "Lakhs ";
+            }
+            if ((i == 5 && value != 0) || (i == 4 && value != 0 && n_array[i + 1] == 0)) {
+                words_string += "Thousand ";
+            }
+            if (i == 6 && value != 0 && (n_array[i + 1] != 0 && n_array[i + 2] != 0)) {
+                words_string += "Hundred and ";
+            } else if (i == 6 && value != 0) {
+                words_string += "Hundred ";
+            }
+        }
+        words_string = words_string.split("  ").join(" ");
+    }
+    return words_string;
+}
+
+
+
+
+
+                        </script>
+</body>
+</html>

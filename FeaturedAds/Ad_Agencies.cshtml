@@ -1,0 +1,140 @@
+﻿@{
+  var db=Database.Open("StarterSite");
+   var featured="SELECT * FROM UserProfile WHERE STATE='Active' AND MODE='Featured' ";
+   var result = db.Query(featured);
+
+   
+}
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title></title>
+    </head>
+    <body>
+
+
+
+<style>
+#Agency-Scroll::-webkit-scrollbar {
+display: none;
+}
+   .ag li
+     {
+     width:31%;
+     display:inline;
+     height:70px;
+     background-color:white;
+      margin-left:4px;
+      margin-top:4px; 
+     float:left;
+     
+     }
+    img.pro {
+   
+    margin-left: -20px;
+     margin-right: -20px;
+    }
+    
+
+</style>
+
+
+
+
+<div class=" w3-small w3-card-4 w3-light-grey" style="padding: 4px">
+ <div class="w3-row " style="margin-bottom: 4px" >
+      <div class="w3-center">
+     <label    class=" w3-left w3-text-blue "> &nbsp; Featured Agencies</label>   </div>
+      
+    </div>
+
+    <div id="Agency-Scroll"  class="cover w3-small w3-card-4 w3-round w3-light-grey" style="overflow-y: scroll; overflow-x: hidden ; width:100%; height: 300px; ">
+        <ul id="ag"  class="ag w3-ul w3-green w3-light-grey  w3-text-blue-grey  w3-center w3-tiny " style="width:100%;">
+       
+   @if(result.Any())
+   {
+    foreach(var row in result)
+   {
+        
+
+    <li class=" w3-hover-shadow " value="@row.UserId"  >
+        
+          <img class="pro" src="~/@row.Image" alt="property" style="width: 72px; height: 70px; margin-top: -8px ">
+         
+    </li>
+}
+   }
+ else
+ {
+     <h2 class="w3-display-middle">No Compnay Available</h2>
+
+ }
+
+    <li class="w3-center w3-hover-shadow" value="Flats">
+        <a href="~/Default.cshtml">
+           <img class="properties" src="~/images/FLAT.jpg" alt="property" style="width: 100%; height: 80%;"><br/>
+           <label class="w3-center w3-tiny"><strong>Flats</strong></label>
+            </a>
+    </li>
+    </ul>
+            </div>
+     
+     <div class="w3-container w3-blue  w3-xlarge w3-center">
+      <div class="w3-left" id="Agencies_upClick"><i class="fa fa-arrow-circle-up w3-hover-text-red"></i></div>
+      <div class="w3-right" id="Agencies_downClick"><i class="fa fa-arrow-circle-down w3-hover-text-red"></i></div>
+    
+</div>
+
+    </div>
+        <form id="timeline" action="~/FeaturedAds/TimeLine2.cshtml" method="get">
+        <input id="company" type="hidden" name="company">
+            </form>
+<script>
+
+
+
+    var scrolled=0;
+
+$(document).ready(function(){
+
+     $("#ag li").click(function () {
+            var sellId = $("#company").val($(this).attr("value"));
+            $("#timeline").submit();
+            
+
+
+     });
+  
+  
+    	
+    $("#Agencies_downClick").on("click" ,function(){
+                scrolled=scrolled+200;
+        
+				$("#Agency-Scroll").animate({
+				        scrollTop:  scrolled
+				   });
+
+			});
+
+    
+    $("#Agencies_upClick").on("click" ,function(){
+				scrolled=scrolled-200;
+				
+				$("#Agency-Scroll").animate({
+				        scrollTop:  scrolled
+				   });
+
+			});
+
+
+
+
+});
+
+</script>
+</body>
+</html>

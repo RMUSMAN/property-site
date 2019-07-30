@@ -1,0 +1,71 @@
+﻿@{    
+    WebImage photo = null;
+    var newFileName = "";
+    var imagePath = "";
+    var imageThumbPath  = "";
+    var name="";
+    var address="";
+    var  price="";
+    var db = Database.Open("khaali");
+ 
+    if(IsPost){
+ name=Request.Form["name"];
+ address=Request.Form["address"];
+ price=Request.Form["price"];
+
+        photo = WebImage.GetImageFromRequest("image");
+        if(photo != null){
+             newFileName = Guid.NewGuid().ToString() + "_" +
+                 Path.GetFileName(photo.FileName);
+             imagePath = @"uploadData\" + newFileName;
+             photo.Save(@"~\" + imagePath);
+ 
+         //   imageThumbPath = @"uploadData\thumbs\" + newFileName;
+        //    photo.Resize(width: 60, height: 60, preserveAspectRatio: true,
+        //       preventEnlarge: true);
+        //    photo.Save(@"~\" + imageThumbPath); 
+            string sql="INSERT INTO AD(NAME, ADDRESS, PRICE, IMAGE) VALUES(@0, @1, @2, @3)";
+            db.Execute(sql,name,address,price,imagePath);
+            }
+    }
+    }
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>upload</title>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    </head>
+    <body>
+        <form class="w3-display-middle w3-padding w3-light-gray" method="post" enctype="multipart/form-data">
+            <h4 class="w3-center w3-text-blue w3-large"><strong>Upload Featured House</strong></h4>
+            <label for="name">Name </label>
+<input type="text" class="w3-input w3-border" name="name" required>
+             <label for="address">Address </label>
+<input type="text" class="w3-input w3-border" name="address" required>
+ <label for="price">Price </label>
+<input type="text" class="w3-input w3-border" name="price" required>
+ <br/>
+ <br/> 
+           <label for="address">Upload Images </label> <br/>
+<input type="file" class="w3-button w3-blue" name="image" accept="image/*">
+             <br/> <br/>
+<button type="submit" class="w3-button w3-teal" >Submit</button>
+<!---  FileUpload.GetHtml(initialNumberOfFiles:1, allowMoreFilesToBeAdded:false, includeFormTag:true, uploadText:"Upload File(s)")--->
+ <br/>
+ <br/>
+             <div style="padding:10px;">
+        @if(imagePath != ""){
+            <img src="@imagePath" alt="Sample Image" width="300px" />
+        }
+    </div>    
+        
+        
+        </form>
+
+
+    </body>
+</html>

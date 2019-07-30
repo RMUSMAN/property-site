@@ -1,0 +1,60 @@
+﻿@{
+    
+
+
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title></title>
+        <link href="~/css/w3css.css" rel="stylesheet">
+    </head>
+    <body>
+        
+        <div class="w3-row w3-margin-top w3-margin-left">
+<div class="w3-col m2" style="margin-left: 55px">
+      <!-- Profile -->
+     @RenderPage("~/FeaturedAds/AdsLayout.cshtml")
+
+ </div>
+        
+        <div class="w3-col m8 " style="float: left; margin-left: 90px" >
+           <div class=" w3-content " style="max-width:1400px; margin-top:0px; margin-left:30px; margin-right:100px; position: absolute; float: right">    
+        
+        @RenderBody()       
+            
+  
+   
+   
+    
+
+   <div id="modal01" class="w3-modal" onclick="this.style.display='none'">
+    <span class="w3-button w3-hover-red w3-xlarge w3-display-topright">&times;</span>
+    <div class="w3-modal-content w3-animate-zoom">
+      <img id="m0" class="largeImage" src="" style="width:100%" alt="no image">
+    </div>
+  </div>
+  
+        
+    <br/>
+         
+        
+        
+          
+
+    
+    </div>
+      
+    </div>
+        
+        
+        
+        
+            </div>
+
+
+    </body>
+</html>

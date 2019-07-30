@@ -1,0 +1,123 @@
+﻿@{
+var sell_id="";    
+
+    // var db=Database.Open("StarterSite");
+    //var sql="SELECT * FROM Sell";
+    var shani="";
+
+
+
+
+
+    if(IsPost)
+    {
+    sell_id =Request.Form["showDetail"];
+  // sell_id=@sellId;
+  shani=sell_id;
+
+      Response.Redirect("~/Property_Details/propertyDetail.cshtml?id="+sell_id);
+    
+    
+    }
+
+}
+<!DOCTYPE html>
+
+<title>W3.CSS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<style>
+  #scroller::-webkit-scrollbar {
+display: none;
+}
+</style>
+<body>
+
+ <div class="w3-top">
+       <div class="w3-top">@RenderPage("~/header.cshtml")</div>
+           </div>
+
+ <p> 
+
+<span class='arrow-left w3-display-topleft w3-btn w3-circle w3-xlarge w3-blue w3-hover-red' style="margin-top:230px;  display:block; position:absolute; margin-left: 50px"><i class="fa fa-arrow-left"></i></span>
+<span class='arrow-right w3-display-topright w3-btn w3-circle w3-xlarge  w3-blue w3-hover-red' style="margin-top:230px; z-index:4; display:block; position:absolute;"><i class="fa fa-arrow-right"></i></span>
+
+</p>
+    
+<div id="scroller"  class="scroll  w3-padding-bottom w3-padding-top " style="width: 100%; overflow-x:auto; white-space: nowrap; margin-top:80px;  overflow-y:hidden; margin-left: 70px">
+  
+ <form id="show" method="post">
+    
+     <br/>
+       <input id="search-type" type="hidden" value="   "   name="showDetail"> 
+     </form> 
+    <br/>
+       @foreach(var row in db.Query(sql))
+          {
+           
+<ul id="set" class=" " style="display: inline; padding-left: 0px">
+           <li id="atag" class="w3-hover-shadow " style="width: 180px; height: 250px; display: inline-block;" value="@row.SELL_ID"  onclick="@Href("~/propertyDetail", @row.SEll_ID)">
+
+    <div class="w3-card-2 w3-round-large w3-small w3-white w3-hover-shadow w3-border " style="width:180px; height:250px; display: inline-block;">
+    <img class=" w3-bottombar w3-border-blue w3-round-large" src="~/@row.IMAGE" alt="NO IMAGE" style="width:100%; height:175px "><br/><br/>
+    <div class="w3-container w3-center">
+      <label class="w3-text-blue w3-large ">@row.NAME</label><br/>
+      <label>@row.PRICE</label>
+    </div>
+  </div>
+  
+  </li>
+    </ul >
+          }
+ 
+</div>
+        
+    <div class="w3-row w3-margin-top w3-margin-left">
+<div class="w3-col m2" style="margin-left: 55px">
+      <!-- Profile -->
+     @RenderPage("~/FeaturedAds/AdsLayout.cshtml")
+
+ </div>
+        
+        <div class="w3-col m8" style="float: left; margin-left: 90px" >
+            @RenderPage("~/Property_Details/propertyDetail.cshtml")
+      
+    </div>
+        
+        
+        
+        
+            </div>
+    <script>
+    $("#set li").click(function(){
+ var sellId = $("#search-type").val($(this).attr("value"));
+    $("#show").submit();
+     //alert($("#search-type").val());
+});
+          $.ajax({
+                type: "POST",
+                url: "~/scrollPage",
+                data: sellId,
+                datatype: "html",
+                success: function (data) {
+                    $('#result').html(data);
+                }
+            });
+</script>
+
+<script>
+$(document).ready(function(){
+    $(".arrow-left").click(function(){
+        $(".scroll").animate({scrollLeft: "-="+850});
+    });
+    $(".arrow-right").click(function(){
+        $(".scroll").animate({scrollLeft: "+="+850});
+    });        
+});
+</script>
+
+</body>
+</html>

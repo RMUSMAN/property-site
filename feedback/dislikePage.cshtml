@@ -1,0 +1,13 @@
+﻿@{
+     var LIKES="";
+      var db=Database.Open("StarterSite");
+      var id = UrlData[0] ?? "1";
+       var updateCommand="UPDATE PROPERTY SET LIKES=LIKES - 1 where ID=@1";
+        db.Execute(updateCommand, LIKES, id);
+
+       var sql = @"SELECT LIKES FROM PROPERTY WHERE ID = @0";
+    var item = db.QuerySingle(sql, id);
+    Json.Write(item, Response.Output);
+}
+
+

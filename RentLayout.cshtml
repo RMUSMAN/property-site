@@ -1,0 +1,616 @@
+﻿@{
+  var searchTerm = Request.QueryString["ShowDetail"];
+  var  city = Request.QueryString["city"];
+  var  location=Request.QueryString["location"];
+   var  dbcommand="";
+   var sql="";
+   var db=Database.Open("StarterSite");
+   var selectCommand="SELECT * FROM PROPERTY ";
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title></title>
+         <link rel="stylesheet" href="~/content/w3css.css">
+            <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+             <style>
+                 
+                    *{
+margin:0px;
+padding:0px;
+
+}
+      #scrolly{
+           
+            height: 110px;
+            overflow: auto;
+            overflow-y: hidden;
+            margin: 0 auto;
+            white-space: nowrap;
+            width: 100%;
+            background-color: #808080;
+            
+        }
+              #scrolly::-webkit-scrollbar {
+display: none;
+}
+      #scrolly img{
+            width: 100px;
+            height: 100px;
+            margin: 5px 1px 4px 4px;
+            display: inline;
+            border: 4px solid #fff;
+        }
+div.cover:hover{
+opacity:.7;
+}
+.upload{
+display:none;
+}
+div.cover:hover .upload{
+display:block;
+
+}
+    ul.detail{
+ margin-bottom:20px;
+  
+  
+  
+}
+
+        ul.detail li  { 
+        display: inline-block;
+         width: 31.33%;
+                height: 140px;
+               
+                 
+                  
+                  margin-left:4px;
+                  margin-top:4px; 
+                  background-color: #fff; } 
+
+           
+
+  #scroller::-webkit-scrollbar {
+display: none;
+             
+}
+</style>
+    </head>
+    <body class="w3-light-gray">
+        <div class="w3-top">
+       <div class="w3-top">@RenderPage("~/header.cshtml")</div>
+           </div>
+        <div>
+            <input id="search-type" type="hidden" value="   "   name="showDetail"> 
+      <h4 class="w3-text-blue "style="margin-top:70px; margin-left: 70px; float: left"><b>@city  &nbsp; @location</b></h4>
+        
+    
+      <div id="scroller"  class="scroll  w3-padding-bottom w3-padding-top " style="width: 100%; overflow-x:auto; white-space: nowrap; margin-top:50px;  overflow-y:hidden; margin-left: 70px">
+
+    <br/>
+
+    @if(!Request.QueryString["showDetail"].IsEmpty() && Request.QueryString["city"].IsEmpty() && Request.QueryString["location"].IsEmpty() )
+    {
+        
+
+     selectCommand = "SELECT * FROM RENT WHERE TYPE  = @0 ";
+      var result=db.Query(selectCommand, searchTerm ) ; 
+      if(result.Any())
+{
+ <p> 
+<span class='arrow-left w3-display-topleft w3-btn w3-circle w3-xlarge w3-blue w3-hover-red' style="margin-top:250px;  display:block; position:absolute; margin-left: 50px"><i class="fa fa-arrow-left"></i></span>
+<span class='arrow-right w3-display-topright w3-btn w3-circle w3-xlarge  w3-blue w3-hover-red' style="margin-top:250px; z-index:4; display:block; position:absolute;"><i class="fa fa-arrow-right"></i></span>
+</p> 
+
+       foreach(var row in result)
+          {
+           
+<ul id="set" class=" " style="display: inline; padding-left: 0px">
+           <li id="atag" class="w3-hover-shadow " style="width: 180px; height: 250px; display: inline-block;" value="@row.ID">
+
+    <div class="w3-card-2 w3-round-large w3-small w3-white w3-hover-shadow w3-border " style="width:180px; height:250px; display: inline-block;">
+    <img class=" w3-bottombar w3-border-blue w3-round-large" src="~/@row.MIMG" alt="NO IMAGE" style="width:100%; height:175px "><br/><br/>
+    <div class="w3-container w3-center">
+      <label class="w3-text-blue w3-large ">@row.NAME</label><br/>
+      <label>@row.PRICE</label>
+    </div>
+  </div>
+  
+  </li>
+    </ul >
+          }
+              } else
+ {
+     <script>alert("my anme is shani");</script>
+                                                
+  }
+    
+ }
+ 
+
+
+
+    @if(!Request.QueryString["showDetail"].IsEmpty() && !Request.QueryString["city"].IsEmpty() && Request.QueryString["location"].IsEmpty() )
+    {
+   
+
+     selectCommand = "SELECT * FROM RENT WHERE TYPE  = @0 AND CITY = @1";
+var result=db.Query(selectCommand, searchTerm , city);
+if(result.Any())
+{
+ <p> 
+<span class='arrow-left w3-display-topleft w3-btn w3-circle w3-xlarge w3-blue w3-hover-red' style="margin-top:250px;  display:block; position:absolute; margin-left: 50px"><i class="fa fa-arrow-left"></i></span>
+<span class='arrow-right w3-display-topright w3-btn w3-circle w3-xlarge  w3-blue w3-hover-red' style="margin-top:250px; z-index:4; display:block; position:absolute;"><i class="fa fa-arrow-right"></i></span>
+</p> 
+
+       foreach(var row in result)
+        {
+           
+<ul id="set" class=" " style="display: inline; padding-left: 0px">
+           <li id="atag" class="w3-hover-shadow " style="width: 180px; height: 250px; display: inline-block;" value="@row.ID">
+
+    <div class="w3-card-2 w3-round-large w3-small w3-white w3-hover-shadow w3-border " style="width:180px; height:250px; display: inline-block;">
+    <img class=" w3-bottombar w3-border-blue w3-round-large" src="~/@row.MIMG" alt="NO IMAGE" style="width:100%; height:175px "><br/><br/>
+    <div class="w3-container w3-center">
+      <label class="w3-text-blue w3-large ">@row.NAME</label><br/>
+      <label>@row.PRICE</label>
+    </div>
+  </div>
+  
+  </li>
+    </ul >
+          }
+ }
+ else
+ {
+
+                                                
+                                                
+  }
+    }
+
+
+     @if(!Request.QueryString["showDetail"].IsEmpty() && !Request.QueryString["city"].IsEmpty() && !Request.QueryString["location"].IsEmpty() )
+    {
+ 
+
+     selectCommand = "SELECT * FROM RENT WHERE TYPE  = @0 AND CITY = @1 AND LOCATION = @2";
+     var result=db.Query(selectCommand, searchTerm , city , location) ; 
+     if(result.Any())
+{
+ <p> 
+<span class='arrow-left w3-display-topleft w3-btn w3-circle w3-xlarge w3-blue w3-hover-red' style="margin-top:250px;  display:block; position:absolute; margin-left: 50px"><i class="fa fa-arrow-left"></i></span>
+<span class='arrow-right w3-display-topright w3-btn w3-circle w3-xlarge  w3-blue w3-hover-red' style="margin-top:250px; z-index:4; display:block; position:absolute;"><i class="fa fa-arrow-right"></i></span>
+</p> 
+
+       foreach(var row in result)
+          {
+           
+<ul id="set" class=" " style="display: inline; padding-left: 0px">
+           <li id="atag" class="w3-hover-shadow " style="width: 180px; height: 250px; display: inline-block;" value="@row.ID">
+
+    <div class="w3-card-2 w3-round-large w3-small w3-white w3-hover-shadow w3-border " style="width:180px; height:250px; display: inline-block;">
+    <img class=" w3-bottombar w3-border-blue w3-round-large" src="~/@row.MIMG" alt="NO IMAGE" style="width:100%; height:175px "><br/><br/>
+    <div class="w3-container w3-center">
+      <label class="w3-text-blue w3-large ">@row.NAME</label><br/>
+      <label>@row.PRICE</label>
+    </div>
+  </div>
+  
+  </li>
+    </ul >
+          }
+          } else
+ {
+     
+     
+     
+        
+      <div class="w3-third w3-card-4 w3-white w3-display-middle w3-center w3-animate-top " style="margin-top:200px" >
+    <header class="w3-container w3-blue">
+      <h3>Khaali.com</h3>
+    </header>
+
+    
+      <form id="RentForm" class="w3-container " action="@Href("~/SellScroll.cshtml")" method="GET">
+ 
+           <input id="ptype" class="w3-light-gray w3-center w3-tiny"  type="hidden"  value="@searchTerm" name="showDetail"  >
+       <input id="ptype" class="w3-light-gray w3-center w3-tiny"  type="hidden"  value="@city" name=""  >
+  <div class="w3-container">
+  <p class="w3-large w3-text-blue w3-container" >
+      There is no Rent <b>@searchTerm</b> Avaliable at <b>@location</b> 
+      . click to see all sale @searchTerm in <button type="submit" class="w3-white w3-btn w3-text-red">@city</button> 
+  </p>
+  </div>
+  
+  </form>
+   <div class="w3-container w3-center w3-margin-bottom">
+   <button class="w3-btn w3-blue"><a href="~/Default.cshtml">Back to home</a></button>
+</div>
+   
+  </div>
+
+                                         
+                                                }
+    
+ }
+
+
+</div>   
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+                 </div>
+
+        <div class="w3-row w3-margin-top w3-margin-left">
+<div class="w3-col m2" style="margin-left: 55px">
+      <!-- Profile -->
+     @RenderPage("~/FeaturedAds/AdsLayout.cshtml")
+
+ </div>
+        
+        <div class="w3-col m8 " style="float: left; margin-left: 90px" >
+           <div class=" w3-content " style="max-width:1400px; margin-top:0px; margin-left:30px; margin-right:100px; position: absolute; float: right">    
+        
+           
+            
+  
+   
+   
+    <div class="" style="float: right; ">
+        
+<div class="w3-bar w3-border w3-teal w3-center w3-small w3-padding">
+  <a id="purpose" href="#" style="width:33%" class="w3-bar-item w3-button w3-mobile"><b>Purpose-For Sale</b> </a>
+  <a id="type" href="#" style="width:33%" class="w3-bar-item w3-button w3-mobile"><b>Property Type-House</b></a>
+  <a id="city" href="#" style="width:33%" class="w3-bar-item w3-button w3-mobile"><b>Location-City name</b></a>
+ 
+</div>
+<div class="w3-row w3-border w3-border-blue" style="width:100%;  margin-top:5px; margin-bottom: 0px; max-width: 1400px">
+<div class=" w3-half" tyle="width:50%;">
+
+ <div id="future"  class=" w3-small  w3-round  "style="overflow-y: scroll; overflow-x: hidden ; width:100%; height: 495px; max-width: 1400px">
+    <ul class="detail" >
+    
+           <li  class="w3-hover-shadow ">
+ <div class=" w3-white w3-round-large w3-small w3-white w3-hover-shadow w3-border " style="width:100%; height:140px ">
+    <img class=" w3-bottombar w3-border-blue w3-round-large" src="~/images/house1.jpg" alt="NO IMAGE" style="width:100%;height:110px "><br/>
+    <div class="w3-container w3-center">
+      <label class="w3-text-blue w3-small ">RM House</label><br/>
+     </div></div>
+     </li>
+     <li  class="w3-hover-shadow ">
+ <div class=" w3-white w3-round-large w3-small w3-white w3-hover-shadow w3-border " style="width:100%; height:140px ">
+    <img class=" w3-bottombar w3-border-blue w3-round-large" src="~/images/house2.jpg" alt="NO IMAGE" style="width:100%;height:110px "><br/>
+    <div class="w3-container w3-center">
+      <label class="w3-text-blue w3-small ">KU house</label><br/>
+     </div></div>
+     </li>
+     
+       <li  class="w3-hover-shadow ">
+ <div class=" w3-white w3-round-large w3-small w3-white w3-hover-shadow w3-border " style="width:100%; height:140px ">
+    <img class=" w3-bottombar w3-border-blue w3-round-large" src="~/images/house3.jpg" alt="~/images/house1.jpg" style="width:100%;height:110px "><br/>
+    <div class="w3-container w3-center">
+      <label class="w3-text-blue w3-small ">Room</label><br/>
+     </div></div>
+     </li>
+     <li  class="w3-hover-shadow ">
+ <div class=" w3-white w3-round-large w3-small w3-white w3-hover-shadow w3-border " style="width:100%; height:140px ">
+    <img class=" w3-bottombar w3-border-blue w3-round-large" src="~/images/house5.jpg" alt="NO IMAGE" style="width:100%;height:110px "><br/>
+    <div class="w3-container w3-center">
+      <label class="w3-text-blue w3-small ">LB House</label><br/>
+     </div></div>
+     </li>  
+     
+       <li  class="w3-hover-shadow ">
+ <div class=" w3-white w3-round-large w3-small w3-white w3-hover-shadow w3-border " style="width:100%; height:140px ">
+    <img class=" w3-bottombar w3-border-blue w3-round-large" src="~/images/house1.jpg" alt="NO IMAGE" style="width:100%;height:110px "><br/>
+    <div class="w3-container w3-center">
+      <label class="w3-text-blue w3-small ">FS House</label><br/>
+     </div></div>
+     </li>
+       <li  class="w3-hover-shadow ">
+ <div class=" w3-white w3-round-large w3-small w3-white w3-hover-shadow w3-border " style="width:100%; height:140px ">
+    <img class=" w3-bottombar w3-border-blue w3-round-large" src="~/images/house2.jpg" alt="NO IMAGE" style="width:100%;height:110px "><br/>
+    <div class="w3-container w3-center">
+      <label class="w3-text-blue w3-small ">US House</label><br/>
+     </div></div>
+     </li>
+       <li  class="w3-hover-shadow ">
+ <div class=" w3-white w3-round-large w3-small w3-white w3-hover-shadow w3-border " style="width:100%; height:140px ">
+    <img class=" w3-bottombar w3-border-blue w3-round-large" src="~/images/house3.jpg" alt="NO IMAGE" style="width:100%;height:110px "><br/>
+    <div class="w3-container w3-center">
+      <label class="w3-text-blue w3-small ">PP House</label><br/>
+     </div></div>
+     </li>
+       <li  class="w3-hover-shadow ">
+ <div class=" w3-white w3-round-large w3-small w3-white w3-hover-shadow w3-border " style="width:100%; height:140px ">
+    <img class=" w3-bottombar w3-border-blue w3-round-large"src="~/images/house5.jpg" alt="NO IMAGE" style="width:100%;height:110px "><br/>
+    <div class="w3-container w3-center">
+      <label class="w3-text-blue w3-small "> RH House </label><br/>
+     </div></div>
+     </li>
+       <li  class="w3-hover-shadow ">
+ <div class=" w3-white w3-round-large w3-small w3-white w3-hover-shadow w3-border " style="width:100%; height:140px ">
+    <img class=" w3-bottombar w3-border-blue w3-round-large" src="~/images/house1.jpg" alt="NO IMAGE" style="width:100%;height:110px "><br/>
+    <div class="w3-container w3-center">
+      <label class="w3-text-blue w3-small ">Vehari</label><br/>
+     </div></div>
+     </li>
+       <li  class="w3-hover-shadow ">
+ <div class=" w3-white w3-round-large w3-small w3-white w3-hover-shadow w3-border " style="width:100%; height:140px ">
+    <img class=" w3-bottombar w3-border-blue w3-round-large" src="~/images/house2.jpg" alt="NO IMAGE" style="width:100%;height:110px "><br/>
+    <div class="w3-container w3-center">
+      <label class="w3-text-blue w3-small ">CM House</label><br/>
+     </div></div>
+     </li>
+       <li  class="w3-hover-shadow ">
+ <div class=" w3-white w3-round-large w3-small w3-white w3-hover-shadow w3-border " style="width:100%; height:140px ">
+    <img class=" w3-bottombar w3-border-blue w3-round-large" src="~/images/house3.jpg" alt="NO IMAGE" style="width:100%;height:110px "><br/>
+    <div class="w3-container w3-center">
+      <label class="w3-text-blue w3-small ">RM Ghar</label><br/>
+     </div></div>
+     </li>
+     
+     </ul>
+</div>
+<div class="w3-blue w3-small w3-bottommiddle" style="width:100%">
+<button class=" w3-button w3-right w3-round w3-block  w3-margin-top w3-blue w3-margin-bottom ">
+    <i class="downscroll   fa fa-arrow-circle-down w3-large w3-left"></i>
+      <i class="upscroll  fa fa-arrow-circle-up w3-large w3-right"></i>
+</button>
+</div>
+ 
+</div>
+  <div class="w3-half">
+    
+      <div class="w3-white w3-text-grey w3-card-4">
+       
+          <img id="picture" src="~/images/p1.jpg" style="width:100%" alt="Avatar"><br/>
+        <div class="w3-container w3-margin-top">
+           
+      <div class="w3-col s8">
+        <p id="name" class=" w3-left w3-text-blue "><strong>The name of House </strong></p>
+       </div>
+      <div class="w3-col s4">
+      <span >
+      <p class="w3-center w3-right w3-padding w3-small w3-text-blue">2001</p>
+          <p class="w3-center w3-right  w3-large"><i class="fa fa-thumbs-up w3-hover-text-red"></i></p>
+       </span>
+       </div>
+     <p id="address" class="w3-left w3-small w3-text-black" style="margin-top:-5px;">comsats university vehari pir murad punjab pakistan</p><br/>
+     
+      
+       <h3 id="price" class="w3-row w3-text-red"><strong>Rs :</strong> 30 Million </h3>
+      
+    <p id="description"  class="w3-small w3-text-blue" >discription of property fksjfksjf sdfjslkf sskjfksd dfjslkfsdkf slkfsjf fkjsdf dfjksdfjsd skdfsdkjf skdjfskd kfjajsdf fsdj 
+   </p> 
+     <table class="w3-table w3-bottombar   w3-small">
+    <tr>
+    <h3 class="w3-text-blue w3-margin-left w3-medium"><b>Property Details</b> </h3>
+    </tr>
+    
+    
+      <tr>
+      <td><b>area</b></td>
+      <td id="area">50</td>
+       <td><b>bedrooms</b></td>
+        <td id="bedroom">02</td>
+    </tr>
+    <tr>
+      <td><b>bathrooms</b></td>
+      <td id="bathroom">03</td>
+      <td ><b>kitchen</b></td>
+       <td id="kitchen">10</td>
+    </tr>
+    <tr>
+      <td ><b>storerooms</b></td>
+      <td id="storeroom">43</td>
+      <td><b>carparking</b></td>
+       <td id="carparking">01</td>
+       
+    </tr>
+    
+    <tr>
+     <td><b>Khaali.pk.id</b></td>
+      <td id="khaaliId">kh00001</td>
+     <td><b>Construction</b></td>
+      <td id="construction">2014</td>
+    </tr>
+  </table>
+  <div class="w3-responsive">
+  <div class="w3-row w3-small">
+      <div class="w3-half w3-center " style="width:40%; padding-left:0%;">
+      <h4 class="w3-text-blue w3-padding  w3-left w3-medium"><strong>ContentInfo</strong></h4>   <br/>  
+       <p ><button class="w3-btn w3-center w3-small w3-block w3-blue "style="height:30px; margin-top:4px;" >Owner Name</button> </p>
+     <p ><button class="w3-btn w3-small w3-block w3-orange " style="height:30px; margin-top:4px;">ContactNo</button> </p>
+        <p ><button class="w3-btn w3-small w3-block w3-green" style="height:30px; margin-top:4px;">Send Email</button> </p>
+       </div>
+      <div class="w3-half w3-left w3-small w3-block " style="width:58%; margin-right:-12px">
+       <h4 class="w3-text-white w3-padding  w3-medium"><strong>Details</strong></h4>
+        <p id="owner" class="w3-padding" style="margin-top:0px;"><b>Rana Usman</b> </p>
+        <p id="contact" class="w3-padding" style="margin-top:0px;"><b>03000979123</b></p>
+        <p id="email" class="w3-padding" style="margin-top:0px;"><b>usman.shani041@gmail.com</b></p>
+      </div>
+    </div>  
+	</div>
+  
+    
+    
+    
+    
+        </div>
+       
+  </div>
+  
+  
+</div>
+
+</div>
+
+</div>
+
+   
+  
+        
+    <br/>
+         
+        
+        
+          
+<div class=" w3-card-4 w3-white  w3-margin-top w3-margin-right" style="width: 100% ; height: 600px; position: relative; float: right;  ">
+    
+ <div class="w3-row w3-margin-bottom  ">
+    <div class="w3-half   w3-padding w3-border-right" style="width: 100%;  ">
+        <h6 class="w3-text-blue w3-topleft"><strong>Photo Gallary</strong></h6>
+     <img id="largeImage" src="~/images/house1.jpg " class="w3-border w3-padding" alt="no image" style="width: 98%; height: 400px" /></img>
+   
+    </div>
+     
+ </div>
+    
+    <div id='scrolly' class=" thumbnails w3-container w3-display-bottommiddle w3-margin-top w3-center">
+       
+      <img id="m0" class="properties" src=""  >
+ </img>
+
+         <img id="m1" class="properties" src="" >
+ </img>
+        <img id="m2" class="properties" src=""   >
+ </img>
+         <img id="m3" class="properties" src=""  alt="property" >
+ </img>
+        <img id="m4" class="properties" src=""  alt="property" >
+ </img>
+    <img id="m5" class="properties" src=""  alt="property" >
+ </img>
+      <img id="m6" class="properties" src=""  alt="property" >
+ </img>
+      <img id="m7" class="properties" src=""  alt="property" >
+ </img>
+      <img id="m8" class="properties" src=""  alt="property" >
+ </img>
+      <img id="m9" class="properties" src=""  alt="property" >
+ </img>
+      <img id="m10" class="properties" src=""  alt="property" >
+ </img>
+ <img id="m11" class="properties" src=""  alt="property" >
+ </img>
+         <img id="m12" class="properties" src=""  alt="property" >
+ </img>
+    </div>
+         <p> 
+
+<span class='scrolly-left w3-display-bottomleft w3-btn w3-center  w3-xlarge w3-light-gray ' style=" z-index:4; display:block; position:absolute; width: 50px; height: 110px;"><i class="fa fa-arrow-left w3-display-left w3-text-blue w3-padding "></i></span>
+<span class='scrolly-right w3-display-bottomright w3-btn w3-center  w3-xlarge  w3-light-gray  ' style=" z-index:4; display:block; position:absolute; width: 50px; height: 110px"><i class="fa fa-arrow-right w3-display-left w3-text-blue w3-padding "></i></span>
+
+</p>
+
+</div>
+    
+    </div>
+      
+    </div>
+        
+        
+        
+        
+            </div>
+        <script>
+            $("#set li").click(function () {
+                var sellId = $("#search-type").val($(this).attr("value"));
+             //   alert($("#search-type").val());
+                // $("#show").submit();
+                $.ajax({
+                    type: "POST",
+                    url: "/GetDetailRent/" + $("#search-type").val(),
+                    data: "{}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                        var row = data;
+                     //   alert("my name is usman");
+                     $('#name').empty();
+                     $('#price').empty();
+                      $('#area').empty();
+                      $('#bedroom').empty();
+                      $('#bathroom').empty();
+                     $('#address').empty();
+                      $('#description').empty();
+                      $('#storeroom').empty();
+                      $('#kitchen').empty();
+                      $('#carparking').empty();
+                     $('#khaaliId').empty();
+                      $('#construction').empty();
+                      $('#owner').empty();
+                      $('#contact').empty();
+                     $('#email').empty();
+                       $('#purpose').empty();
+                      $('#type').empty();
+                     $('#city').empty();
+
+                     
+                        $('#purpose').append(row.PURPOSE);
+                            $('#type').append(row.TYPE);
+                             $('#city').append(row.CITY);
+                  $('#name').append(row.NAME);
+                   $('#picture').attr('src', row.MIMG);
+                   $('#address').append(row.LOCATION);
+                   $('#price').append(row.PRICE);
+                    $('#area').append(row.AREA);
+                     $('#bedroom').append(row.BEDROOMS);
+                      $('#bathroom').append(row.BATHROOMS);
+                       $('#storeroom').append(row.STOREROOMS);
+                        $('#kitchen').append(row.KITCHENS);
+                         $('#carparking').append(row.CARPARKING);
+                         $('#khaaliId').append(row.KHAALI_ID);
+                          $('#construction').append(row.YEAR);
+                           $('#owner').append(row.OWNER);
+                            $('#contact').append(row.CONTACT);
+                             $('#email').append(row.EMAIL);
+                  
+                        
+                            $('#m0').attr('src', row.MIMG);
+                              $('#m1').attr('src', row.IMG1);
+                               $('#m2').attr('src', row.IMG2);
+                                $('#m3').attr('src', row.IMG3);
+                                 $('#m4').attr('src', row.IMG4);
+                                  $('#m5').attr('src', row.IMG5); 
+                                  $('#m6').attr('src', row.IMG6);
+                                   $('#m7').attr('src', row.IMG7);
+                                    $('#m8').attr('src', row.IMG8);
+                                     $('#m9').attr('src', row.IMG9);
+                                      $('#m10').attr('src', row.IMG10);
+                                       $('#m11').attr('src', row.IMG11);
+                                        $('#m12').attr('src', row.IMG12);
+                    }
+                });
+
+
+
+            });
+        </script>
+
+    </body>
+</html>

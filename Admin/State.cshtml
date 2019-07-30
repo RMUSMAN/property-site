@@ -1,0 +1,14 @@
+﻿@{
+  
+     var db = Database.Open("starterSite");
+    if(IsPost){
+     var  state=Request.Form["state"];
+     var  mode=Request.Form["mode"];
+     var  stateId=Request.Form["stateId"];
+       
+    var updateQuerystring="UPDATE PROPERTY SET STATE =@0 , MODE=@1  WHERE ID= @2 ";
+   db.Execute(updateQuerystring , state , mode , stateId);
+   Response.Redirect("~/Admin/Properties.cshtml");
+
+ }
+}

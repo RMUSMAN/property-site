@@ -1,0 +1,105 @@
+
+*
+{
+margin:0;
+padding:0;
+
+}
+
+@media (min-width: 992px) and (max-width: 1199px)
+{ 
+div.Tmain
+  {
+   margin-left: 300px; 
+   margin-right: 150px; 
+   margin-top:10px;
+  
+  }
+}
+
+
+
+
+@media (min-width: 768px) and (max-width: 991px)
+{ 
+div.Tmain
+  {
+   margin-left: 200px; 
+   margin-right: 10px; 
+   margin-top:10px;
+  
+  }
+
+}
+
+@media (min-width: 576px) and (max-width: 767px) 
+{ 
+ div.Tmain
+  {
+   margin-left: 20px; 
+   margin-right: 20px; 
+   margin-top:10px;
+  
+  }
+
+}
+
+
+@media (max-width: 575px)
+{ 
+  div.Tmain
+  {
+   margin-left: 0px; 
+   margin-right: 0px; 
+   margin-top:10px;
+  
+  }
+  div.TcountImg
+  {
+ width:100%; 
+ margin-right: -10px;
+  
+  }
+ div.TcountTotal
+  {
+   width:100%; 
+  }
+}
+
+  .Tmain
+  {
+   margin-left: 400px; 
+   margin-right: 200px; 
+    margin-top:100px;
+  }
+ .TcountImg
+  {
+ width:35%; 
+ margin-right: -10px;
+  
+  }
+.TcountImg #blah
+  {
+ width:100%;
+ min-height:130px; 
+ max-height:130px;
+}
+  .TcountTotal
+  {
+   width:65%; 
+  }
+
+.Tcount
+{
+width:25%;
+max-width:200px;  
+min-height:100px;
+}
+  .w3-input
+  {
+  
+  margin-bottom:8px;
+  }  
+  
+  
+  

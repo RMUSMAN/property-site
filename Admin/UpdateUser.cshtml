@@ -1,0 +1,14 @@
+﻿@{
+  
+     var db = Database.Open("starterSite");
+    if(IsPost){
+     var  state=Request.Form["state"];
+     var  mode=Request.Form["mode"];
+     var  stateId=Request.Form["stateId"];
+       
+    var updateQuerystring="UPDATE UserProfile SET STATE =@0 , MODE=@1  WHERE UserId= @2 ";
+   db.Execute(updateQuerystring , state , mode , stateId);
+   Response.Redirect("~/Admin/Users.cshtml");
+
+ }
+}

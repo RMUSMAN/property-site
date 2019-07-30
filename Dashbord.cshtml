@@ -1,0 +1,155 @@
+@{
+    //  WebSecurity.RequireAuthenticatedUser();
+
+         var db = Database.Open("starterSite");
+ var Userprofile="Select * FROM UserProfile WHERE UserId= @0";
+var User= db.QuerySingle(Userprofile , WebSecurity.CurrentUserId);
+
+
+var rcount="SELECT COUNT(*) FROM PROPERTY WHERE PURPOSE='Rent' AND USERID= @0";
+var rent= db.QueryValue(rcount , WebSecurity.CurrentUserId);
+var scount="SELECT COUNT(*) FROM PROPERTY WHERE PURPOSE='sale' AND USERID= @0";
+var sale= db.QueryValue(scount , WebSecurity.CurrentUserId);
+var fcount="SELECT COUNT(*) FROM PROPERTY WHERE MODE='featured' AND USERID= @0";
+var featured= db.QueryValue(fcount , WebSecurity.CurrentUserId);
+var total=rent+sale;
+
+
+}
+
+<!DOCTYPE html>
+
+<title>W3.CSS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+     
+<style>
+h1,h2,h3,h4,h5,h6,label{
+
+}
+</style>
+<body class="w3-light-gray">
+ 
+
+    <div class=" w3-card-4 w3-white w3-contain w-border w3-border-blue" style="margin-left: 400px; margin-right: 200px; max-width:1000px; margin-top:100px">
+
+<div class="w3-row w3-bottombar w3-border-light-gray" style="height:10%">
+  <div class="w3-half w3-padding w3-gree w3-borde w3-border-blue  w3-center" style="width:35%; margin-right: -10px"><img src="~/@User.Image" style="width:100%;min-height:125px; max-height:125px;height:10% " alt="Google Regional Map"></div>
+  <div class="w3-half  " style=" width:65%; ">
+   <div class="w3-row-padding w3-margin-bottom">
+    <div class="w3-quarter" style="width:25%; max-width:200px; min-width:100px; min-height:100px">
+    <a class="w3-hover-shadow" title="Click to see all properites">
+      <div class=" w3-red w3-center">
+       
+          <h3 class=" w3-bottombar w3-center w3-pad w3-border-light-grey w3-small" style="padding-top:8px; padding-bottom:8px;">Total Properties</h3>
+  
+        <div class="w3-clear w3-center w3-padding w3-small">
+        <h4>@total</h4>
+      </div>
+    </div>
+    </a>
+    </div>
+   <div class="w3-quarter" style="width:25%; max-width:200px; min-width:100px; min-height:100px">
+   <a class="w3-hover-shadow" title="Click to see only Rent properites">
+      <div class=" w3-blue w3-center">
+       
+          <h3 class=" w3-bottombar w3-border-light-grey w3-small" style="padding-top:8px; padding-bottom:8px;">For Rent</h3>
+  
+        <div class="w3-clear w3-center w3-padding">
+        <h4>@rent</h4>
+      </div>
+    </div>
+    </a>
+    </div>
+    <div class="w3-quarter" style="width:25%; max-width:200px; min-width:100px; min-height:100px">
+    <a class="w3-hover-shadow" title="Click to see only Sell properites">
+      <div class=" w3-green w3-center">
+       
+          <h3 class=" w3-bottombar w3-border-light-grey w3-small" style="padding-top:8px; padding-bottom:8px;">For Sell</h3>
+  
+        <div class="w3-clear w3-padding">
+        <h4>@sale</h4>
+      </div>
+    </div>
+    </a>
+    </div>
+    <div class="w3-quarter" style="width:25%; max-width:200px; min-width:100px; min-height:100px">
+    <a class="w3-hover-shadow" title="Click to see only Featured properites">
+      <div class=" w3-purple w3-center">
+       
+          <h3 class=" w3-bottombar w3-border-light-grey w3-small" style="padding-top:8px; padding-bottom:8px;">Featured</h3>
+  
+        <div class="w3-clear w3-padding">
+        <h4>@featured</h4>
+      </div>
+    </div>
+    </a>
+    </div>
+    </div>
+ </div>
+ </div>
+ 
+  <div class="w3-row w3-bottombar w3-border-light-grey" >
+
+  <div class="w3-half   w3-padding">
+
+  <label class="w3-small w3-text-blue"><strong>Company Details</strong></label>
+       <a href="~/EditProfile.cshtml" class="w3-small w3-btn w3-right  w3-text-blue"><i class="fa fa-pencil w3-large"></i></a>
+    
+       <br/>
+  <label class="w3-xlarge"><strong>@User.Company</strong> </label>
+  <br/>
+   <label class="w3-small">@User.Address</label>
+   <br/>
+    <div class="w3-row w3-small">
+      <div class="w3-half w3-left ">   
+         
+      <h4 class="w3-text-gray w3-small"><strong>Founded</strong></h4>  
+    
+        <h4 class="w3-text-gray w3-small"><strong>Kaali.Pk.ID</strong></h4>  
+       </div>
+      <div class="w3-half w3-left w3-small">
+       
+     <h4 class="w3-text-gray w3-small"><strong>@User.Founded</strong></h4>  
+        <h4 class="w3-text-gray w3-small"><strong>@User.Userid</strong></h4>  
+      </div>
+    </div>   
+  </div>
+ 
+ <div class="w3-half   w3-leftbar w3-border-light-gray" >
+  <div class="w3-row w3-small">
+      <div class="w3-half w3-center " style="width:40%; padding-left:20px; padding-right:20px">
+      <h4 class="w3-text-blue  w3-left w3-small"><strong>ContentInfo</strong></h4>     
+       <p ><button class="w3-button w3-small w3-block w3-blue"style="height:30px; margin-bottom: 8px;" >Owner Name</button> </p>
+     <p ><button class="w3-button w3-small w3-block w3-orange" style="height:30px; margin-bottom: 8px;">ContactNo</button> </p>
+        <p ><button class="w3-button w3-small w3-block w3-green" style="height:30px; margin-bottom: 8px;">Send Email</button> </p>
+       </div>
+      
+      <div class="w3-half w3-left w3-small " style="width:60%">
+            <a href="~/EditProfile.cshtml" class="w3-small w3-btn w3-right w3-margin-right  w3-text-blue"><i class="fa fa-pencil w3-large"></i></a>
+    
+       <h4 class="w3-text-white w3-small"><strong>Details</strong></h4>
+        <p ><label class=" w3-small w3-block " style="height:30px;"><b>@User.Name</b></label> </p>
+        <p class="w3-margin-top"><label class=" w3-small w3-block " style="height:30px;"><b>@User.Phone</b></label> </p>
+        <p class="w3-margin-top"><label class=" w3-small w3-block " style="height:30px;"><b>@User.Email</b></label> </p>
+      </div>
+         
+    </div> 
+      </div>  
+</div>
+        <div class="w3-row-padding w3-bottombar w3-border-light-gray">
+ <label class="w3-small w3-text-blue "><strong>About Company</strong></label><br/>
+<div class="w3-col w3-small" style="width:100%" style="padding:0px">
+<p style=" margin-top:0px">@User.Description</p>
+</div>
+
+
+
+        </div>
+</div>
+
+    
+   
+</body>
+</html>        

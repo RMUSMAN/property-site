@@ -1,0 +1,121 @@
+﻿@{
+  var db=Database.Open("StarterSite");
+    var select_sql="SELECT * FROM CITIES ";
+
+}
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title></title>
+       
+     
+  
+
+      <style>
+        
+             #sal li {       
+                width: 24%;
+                height: 120px;
+               
+                   padding-bottom : 4px;
+                  
+                  margin-left:4px;
+                  margin-top:4px; 
+                  background-color: #fff;
+                 
+                border: none;
+  line-height:1.5em;
+
+  float:left;
+  display:inline;
+
+            }
+</style>
+    </head>
+    <body class="w3-light-gray">
+        <form class="w3-text-blue-grey" id="PropertyForm" action="~/SaleLayout.cshtml" method="GET" style="max-width: 1400px">
+
+            <div class=" w3-row w3-margin-bottom" style="box-shadow: none;">
+                  <div class="w3-half w3-center  w3-light-gray" style="margin: auto; width: 50%;">
+                    
+      <select id="scity" class="w3-select w3-border w3-round  w3-card" name="city" style="width: 99%; margin-top: 4px; margin-bottom: 4px; margin-left: 2px;margin-right: 2px; height: 35px ">
+    <option value="" disabled selected>Select City</option>
+  @foreach(var cit in db.Query(select_sql))
+{
+       <option value="@cit.NAME">@cit.NAME</option>
+}      
+  </select>
+</div>                
+                
+         <div class="w3-half w3-center  w3-light-gray" style="margin: auto;width: 50%; ">              
+        <select id="sloc"  class="w3-select w3-border w3-round  w3-card" name="location" style="width: 99%; margin-top: 4px; margin-bottom: 4px; margin-left: 2px;margin-right: 2px; height: 35px ">  
+        <option value="" disabled selected>Select location</option>
+        </select>  
+        </div> 
+ <input id="stype" class="w3-light-gray w3-center  w3-tiny w3-hide"  type="text"  value="" name="showDetail" style="height: 1px; width: 2px ; margin-left: 2px;" >
+      
+</div>
+
+<ul id="sal" class="w3-light-gray w3-text-blue-grey w3-padding-bottom w3-center ">
+        
+    <li class="w3-center w3-hover-shadow" value="house" >
+          <img class="properties" src="~/images/HOUSES3.jpg" alt="property" style="width: 80px; height: 80px;"><br/>
+          <label class="w3-center"><strong>House</strong></label>
+    </li>
+
+    <li class="w3-center w3-hover-shadow" value="flat">
+           <img class="properties" src="~/images/FLAT.jpg" alt="property" style="width: 80px; height: 80px;"><br/>
+           <label class="w3-center"><strong>Flats</strong></label>
+    </li>
+
+
+    
+    <li class="w3-center w3-hover-shadow" value="office">
+          <img class="properties" src="~/images/OFFICE1.jpg" alt="property" style="width: 80px; height: 80px;"><br/>
+          <label class="w3-center"><strong>Office</strong></label>
+    </li>
+
+    
+    <li class="w3-center w3-hover-shadow" value="shop" >
+          <img class="properties" src="~/images/SHOP1.jpg" alt="property" style="width: 80px; height: 80px;"><br/>
+          <label class="w3-center"><strong> Shop </strong></label>
+    </li>
+          
+    
+    <li class="w3-center w3-hover-shadow" value="land">
+          <img class="properties" src="~/images/LAND1.jpg" alt="property" style="width: 80px; height: 80px;"><br/>
+          <label class="w3-center"><strong> Land </strong></label>
+    </li>
+
+    
+  
+  
+    
+     </ul>
+                  
+       </form>
+
+<script>
+
+
+    $(document).ready(function () {
+
+        $("#sal li").click(function () {
+            var sellId = $("#stype").val($(this).attr("value"));
+            $("#PropertyForm").submit();
+           //  alert($("#ptype").val());
+
+
+     });
+    });
+
+</script>
+
+ </body>
+    
+
+</html>

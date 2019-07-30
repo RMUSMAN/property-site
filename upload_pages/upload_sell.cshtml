@@ -1,0 +1,88 @@
+﻿@{
+   WebSecurity.RequireAuthenticatedUser();
+
+
+    Layout = "~/_SiteLayout.cshtml";
+    Page.Title = "upload Property";
+
+  WebImage photo = null;
+    var newFileName = "";
+    var imagePath = "";
+    var imageThumbPath  = "";
+    var name="";
+    var address="";
+    var  price="";
+    var discription="";
+    var construction="";
+    var owner="";
+    var khaali_id="";
+    var ptype="Sell";
+
+    var db = Database.Open("starterSite");
+ 
+    if(IsPost){
+ name=Request.Form["name"];
+ address=Request.Form["address"];
+ price=Request.Form["price"];
+ discription=Request.Form["discription"];
+ construction=Request.Form["construction"];
+ owner=Request.Form["owner"];
+khaali_id=Request.Form["id"];
+
+
+
+        photo = WebImage.GetImageFromRequest("image");
+        if(photo != null){
+             newFileName = Guid.NewGuid().ToString() + "_" +
+                 Path.GetFileName(photo.FileName);
+             imagePath = @"Upload_Pics\" + newFileName;
+             photo.Save(@"~\" + imagePath);
+ 
+         //   imageThumbPath = @"uploadData\thumbs\" + newFileName;
+        //    photo.Resize(width: 60, height: 60, preserveAspectRatio: true,
+        //       preventEnlarge: true);
+        //    photo.Save(@"~\" + imageThumbPath); 
+            string sql="INSERT INTO Sell(P_TYPE , NAME , ADDRESS , PRICE , CONSTRUCTION , OWNER , KHAALI_ID , DISCRIPTION , IMAGE, User_ID) VALUES(@0, @1, @2, @3 , @4, @5, @6, @7, @8, @9)";
+            db.Execute(sql,ptype ,name,address,price,construction,owner,khaali_id,discription,imagePath,WebSecurity.CurrentUserId  );
+            }
+    }
+    }
+
+<!DOCTYPE html>
+
+
+          <form class="w3-display-middle w3-padding w3-light-gray w3-half " method="post" enctype="multipart/form-data" style="margin-top: 100px;">
+            <h4 class="w3-center w3-text-blue w3-large"><strong>Upload Sell Property</strong></h4>
+            <label for="name" >Name </label>
+<input type="text" class="w3-input w3-border" name="name" maxlength="20" required>
+             <label for="address">Address </label>
+<input type="text" class="w3-input w3-border" name="address" required>
+ <label for="price">Price </label>
+<input type="text" class="w3-input w3-border" name="price" maxlength="20"  required>
+               <label for="name">Construction </label>
+<input type="number" class="w3-input w3-border" name="construction" required>
+             <label for="address">Owner </label>
+<input type="text" class="w3-input w3-border" name="owner" maxlength="20"  required>
+ <label for="price">Khaali.pk.id </label>
+<input type="number" class="w3-input w3-border" name="id" required>
+               <label for="price">Discription </label>
+<textarea  class="w3-input w3-border" name="discription" required></textarea>
+
+ <br/>
+  
+           <label for="address">Select Image </label> <br/>
+<input type="file" class="w3-button w3-blue" name="image" accept="image/*" required>
+             <br/> <br/>
+<button type="submit" class="w3-button w3-teal" >Submit</button>
+<!---  FileUpload.GetHtml(initialNumberOfFiles:1, allowMoreFilesToBeAdded:false, includeFormTag:true, uploadText:"Upload File(s)")--->
+ <br/>
+ <br/>
+    </div>    
+        
+            <div style="padding:10px;">
+        @if(imagePath != ""){
+            <img src="@imagePath" alt="Sample Image" width="300px" />
+        }
+    </div> 
+        </form>
+

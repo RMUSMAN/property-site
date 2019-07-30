@@ -1,0 +1,114 @@
+﻿@{
+    var db=Database.Open("StarterSite");
+    var sql="SELECT * FROM PROPERTY WHERE STATE='Active' AND MODE='Featured' AND NOT TYPE='House'   ";
+    var res = db.Query(sql);
+}
+ 
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title></title>
+       <style>
+            .project {display:none}
+        </style>
+    </head>
+    <body>
+
+
+<div class=" w3-card-4 w3-round" style="padding: 4px">
+    <div class="w3-row " style="margin-bottom: 4px" >
+      <div class="w3-center">
+     <a  href="~/FProjectLayout.cshtml"   class=" w3-left w3-text-blue "> &nbsp; Featured Projects
+    </a>   </div>
+      
+    </div>
+            @if(res.Any())
+   {
+    foreach(var pro in res)
+   {
+                  
+
+      <div class=" w3-display-container project  w3-card-4">
+      <img src="~/@pro.MIMG" alt="House Image" style="width:100%; height: 150px">
+      <div class=" w3-container w3-padding-16 w3-center">
+        <span class=" ">
+        <label class="w3-small w3-text-blue w3-center"><strong>@pro.NAME</strong></label><br/>
+        <label class="w3-small w3-text-gray w3-center">@pro.LOCATION</label><br/>
+         <label class="w3-large w3-text-red w3-center">@pro.PRICE</label><br/>
+      <a href="~/FeaturedAds/FeaturedHouses.cshtml?id=@pro.ID"  class="w3-button w3-small w3-teal w3-round w3-center" style="height: 30px">See More</a>
+        </span>
+      </div>
+    </div>
+
+    
+}
+}    
+
+else
+{
+              
+
+              
+    
+    <div class=" w3-display-container project w3-card-4">
+      <img src="~/images/p3.jpg" alt="House Image" style="width:100%; height: 150px">
+      <div class=" w3-container w3-padding-16 w3-center">
+        <span class="w3-white  ">
+        <label class="w3-small w3-text-blue w3-center"><strong>HOUSE NAME</strong></label><br/>
+        <label class="w3-small w3-text-gray w3-center">House at vehari Comsats</label><br/>
+         <label class="w3-large w3-text-red w3-center">Rs 2.5 Million</label><br/>
+      <button class="w3-button w3-small w3-teal w3-round w3-center" style="height: 30px">See More</button>
+        </span>
+      </div>
+    </div>
+
+
+
+}
+
+
+
+
+     <!-- Slideshow next/previous buttons -->
+    <div class="w3-container w3-blue  w3-xlarge">
+      <div class="w3-left" onclick="plusDivsP(-1)"><i class="fa fa-arrow-circle-left w3-hover-text-red"></i></div>
+      <div class="w3-right" onclick="plusDivsP(1)"><i class="fa fa-arrow-circle-right w3-hover-text-red"></i></div>
+    
+      
+    </div>
+  </div>
+
+<script>
+// Slideshow
+var slideIndex = 1;
+showDivsP(slideIndex);
+
+function plusDivsP(n) {
+  showDivsP(slideIndex += n);
+}
+
+function currentDivP(n) {
+  showDivsP(slideIndex = n);
+}
+
+function showDivsP(n) {
+  var i;
+  var x = document.getElementsByClassName("project");
+  var dots = document.getElementsByClassName("Pdots");
+  if (n > x.length) {slideIndex = 1}    
+  if (n < 1) {slideIndex = x.length} ;
+  for (i = 0; i < x.length; i++) {
+     x[i].style.display = "none";  
+  }
+  for (i = 0; i < dots.length; i++) {
+     dots[i].className = dots[i].className.replace(" w3-white", "");
+  }
+  x[slideIndex-1].style.display = "block";  
+ 
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+﻿@{
+    
+Layout = "~/_AdminLayout.cshtml";
+    Page.Title = "view Users";
+
+
+       var db = Database.Open("starterSite");
+ var profile="Select * FROM UserProfile ORDER by Userid DESC";
+var data= db.Query(profile);
+var grid = new WebGrid(source: data);
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title></title>
+        <style type="text/css">
+  .grid { margin: 4px; border-collapse: collapse; width: 600px; }
+  .grid th, .grid td { border: 1px solid #C0C0C0; padding: 5px; text-decoration: none;}
+  .head { background-color: #E8E8E8; font-weight: bold; color: #FFF;  }
+  .alt { background-color: #E8E8E8; color: #000; }
+</style>
+
+    </head>
+    <body>
+
+
+        <div class="w3-display-topmiddle w3-center" style="margin-top: 100px;">
+            <div class="container w3-half w3-margin-bottom ">
+                <input class="w3-input w3-border w3-card-4 w3-round" placeholder="search User" oninput="w3.filterHTML('.id01', '.item', this.value)" >
+                </div>
+        
+            <table>
+            <tr>
+            <th></th>
+            
+            </tr>
+                <tr></tr>
+            
+            
+            </table>
+
+
+
+      @grid.GetHtml(
+    tableStyle: "grid id01 w3-table w3-text-grey w3-small w3-leftbar w3-rightbar w3-bottombar w3-topbar  w3-white w3-card-4",
+     rowStyle:"item",
+    headerStyle: "head w3-blue",
+    alternatingRowStyle: "alt w3-stripped w3-padding",
+    columns: grid.Columns(
+        grid.Column("Company"),
+        grid.Column("Name"),
+        grid.Column("Email"),
+        grid.Column("Phone"),
+         grid.Column("STATE"),
+        grid.Column("MODE"),
+        grid.Column(format: @<a href="~/Admin//DeleteUser?ID= @item.UserId"><b><i class="w3-text-red w3-margin-left w3-large fa fa-info-circle"></i></b></a>)
+      )
+)
+        
+        </div>
+        
+
+    </body>
+</html>

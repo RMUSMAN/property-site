@@ -1,0 +1,107 @@
+﻿@* Remove this section if you are using bundling *@
+
+@{
+    Layout = "~/_Accounts.cshtml";
+    Page.Title = "Log in";
+
+    // Initialize general page variables
+    var email = "";
+    var password = "";
+    var rememberMe = false;
+
+    var returnUrl = Request.QueryString["ReturnUrl"];
+    if (returnUrl.IsEmpty()) {
+        // Some external login providers always require a return URL value
+        returnUrl = Href("~/");
+    }
+
+    // Setup validation
+ //   Validation.RequireField("email", "You must specify an email address.");
+ //   Validation.RequireField("password", "You must specify a password.");
+    Validation.Add("password",
+        Validator.StringLength(
+            maxLength: Int32.MaxValue,
+            minLength: 6,
+            errorMessage: "Password must be at least 6 characters"));
+
+    // If this is a POST request, validate and process data
+    if (IsPost) {
+       
+        // is this an external login request?
+        string provider = Request.Form["provider"];
+        if (!provider.IsEmpty()) {
+            OAuthWebSecurity.RequestAuthentication(provider, Href("~/Account/RegisterService", new { returnUrl }));
+            return;
+        } else if (Validation.IsValid()) {
+            email = Request.Form["email"];
+            password = Request.Form["password"];
+            rememberMe = Request.Form["rememberMe"].AsBool();
+
+            if (WebSecurity.UserExists(email) && WebSecurity.GetPasswordFailuresSinceLastSuccess(email) > 4 && WebSecurity.GetLastPasswordFailureDate(email).AddSeconds(60) > DateTime.UtcNow) {
+                Response.Redirect("~/Account/AccountLockedOut");
+                return;
+            }
+
+            // Attempt to log in using provided credentials
+            if (WebSecurity.Login(email, password, rememberMe)) {
+                Context.RedirectLocal(returnUrl);
+                return;
+            } else {
+                ModelState.AddFormError("The user name or password provided is incorrect.");
+            }
+        }
+    }
+}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>login</title>
+
+        </head>
+<body>    
+    
+    
+   
+ 
+    
+    
+  <div class =" w3-margin-top ">  
+   
+ 
+ <form method="post" >
+
+
+  @Html.ValidationSummary("Invalid Login or Password.", excludeFieldErrors: true, htmlAttributes: null)
+  
+
+
+
+      <input id="email" class="w3-input w3-border w3-border-blue w3-round" name="email" value="@email" type="email" style="margin-bottom:5px"  placeholder="Enter Email" @Validation.For("email")  required>
+ @if (!ModelState.IsValidField("email"))
+                            { <text>class="w3-text-blue error-label"</text>}  
+
+@Html.ValidationMessage("email")
+   
+
+
+      <input id="password" class="w3-input w3-border w3-border-blue w3-round" name="password" type="password" style="margin-bottom:5px" value="@password" placeholder="Enter password" required>
+ @if (!ModelState.IsValidField("password"))
+                                       {<text>class="error-label"</text>}     
+@Html.ValidationMessage("password")
+   <br/>
+<input type="checkbox" class="w3-check" id="rememberMe" name="rememberMe" style="margin-bottom: 10px;" value="true" checked="@rememberMe" />
+                    <label class="checkbox" for="rememberMe">Remember me?</label></br>
+
+
+  
+ <button type="submit" class="w3-btn w3-blue w3-ripple" style="margin-bottom: 10px;">Login</button>
+
+
+     </form>
+  </div>
+ 
+ </div>   
+  </body>
+</html>

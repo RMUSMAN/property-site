@@ -1,0 +1,8 @@
+﻿@{
+      var db=Database.Open("StarterSite");
+    var id = UrlData[0] ?? "lahore";
+    var sql = @"SELECT LOCATION FROM LOCATION WHERE CITYID = @0";
+    var item = db.Query(sql, id);
+    Json.Write(item, Response.Output);
+}
+

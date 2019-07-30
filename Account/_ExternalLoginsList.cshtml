@@ -1,0 +1,20 @@
+﻿@if (OAuthWebSecurity.RegisteredClientData.Count == 0) {
+    <div class="message-info">
+        <p>
+            There are no external authentication services configured. See <a href="http://go.microsoft.com/fwlink/?LinkId=226949">this article</a>
+            for details on setting up this ASP.NET application to support logging in via external services.
+        </p>
+    </div>
+} else {
+    <form method="post" class="w3-padding w3-center w3-half">
+    @AntiForgery.GetHtml()
+ 
+ <p class="w3-center">       
+            @foreach (var client in OAuthWebSecurity.RegisteredClientData) {
+                <button type="submit" class="w3-button w3-blue w3-round-xlarge" name="provider" value="@client.AuthenticationClient.ProviderName"
+                        title="@client.DisplayName">@client.DisplayName</button>
+            }
+        
+   </p>
+    </form>
+}

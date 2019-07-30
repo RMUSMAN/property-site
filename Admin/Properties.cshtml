@@ -1,0 +1,113 @@
+﻿@{
+    Layout = "~/_AdminLayout.cshtml";
+    Page.Title = "view Sale Properties";
+
+
+       var db = Database.Open("starterSite");
+ var prop="Select * FROM PROPERTY ORDER by ID DESC";
+var result= db.Query(prop);
+
+
+
+
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title></title>
+          
+     
+        <style type="text/css">
+  
+</style>
+
+    </head>
+    <body>
+
+
+        <div class="w3-display-topmiddle w3-center" style="margin-top: 100px; margin-left: 50px">
+            <div class="container w3-half w3-margin-bottom ">
+                <input class="w3-input w3-border w3-card-4 w3-round" placeholder="search User" oninput="w3.filterHTML('.id01', '.item', this.value)" >
+                </div>
+        
+            <table class="w3-table id01 w3-white w3-border w3-striped w3-small w3-card-4 w3-leftbar w3-rightbar w3-bottombar w3-topbar">
+
+<tr class="w3-blue ">
+    <th>ID</th>
+     <th>Purpose</th>
+     <th>Type</th>
+     <th>Name</th>
+     <th>City</th>
+     <th>Location</th>
+     <th>Price</th>
+     <th>Area</th>
+     <th>Owner</th>
+     <th>Email</th>
+     <th>Contact</th>
+     <th>State</th>
+      <th>Mode</th>
+      <th>Detail</th>
+</tr>
+                 @foreach(var data in result)
+
+          {
+              
+  <tr class="item">
+      <td>@data.ID</td>
+      <td>@data.PURPOSE</td>
+      <td>@data.TYPE</td>
+      <td>@data.NAME</td>
+      <td>@data.CITY</td>
+      <td>@data.LOCATION</td>
+      <td>@data.PRICE</td>
+       <td>@data.AREA</td>
+      <td>@data.OWNER</td>
+      <td>@data.EMAIL</td>
+      <td>@data.CONTACT</td>
+      <td class="w3-text-blue"><b>@data.STATE</b></td>
+       <td class="w3-text-orange"><b>@data.MODE</b></td>
+       
+<td>
+    <a href="~/Admin/DeleteProperty?ID=@data.ID"><b><i class="w3-text-red w3-margin-left w3-large  fa fa-info-circle"></i></b></a>
+      
+
+</td>
+     
+                        
+            
+                
+   </tr>
+          }
+
+
+
+
+                </table>     </div>
+
+        <script>
+$(document).ready(function()
+{
+    $("#stateS").change(function()
+    {
+     
+        alert($(this).val());
+      //  var dataString = 'id='+ id;
+       // alert(id); return false;
+
+    });
+
+});
+
+        </script>
+
+
+
+
+
+
+
+    </body>
+</html>

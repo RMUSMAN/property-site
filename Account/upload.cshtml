@@ -1,0 +1,28 @@
+﻿@{
+     WebSecurity.RequireAuthenticatedUser();
+
+    Layout = "~/_SiteLayout.cshtml";
+    Page.Title = "upload your vedio";
+
+}
+
+<div id="upload" class="w3-container w3-border w3-card-4 city w3-white" tyle="display:none">
+    <h2 class="w3-center w3-xlarge">Upload yor vedio</h2>
+   <div class="container w3-margin-top" >
+            <form>
+                <input type="file" accept=".xlsx,.xls,image/*,.doc,audio/*,.docx,video/*,.ppt,.pptx,.txt,.pdf" multiple>
+            </form>
+        </div>
+
+         <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+        <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="dist/imageuploadify.min.js"></script>
+
+<script type="text/javascript">
+            $(document).ready(function() {
+                $('input[type="file"]').imageuploadify();
+            })
+        </script>
+
+
+</div>

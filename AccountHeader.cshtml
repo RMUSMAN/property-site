@@ -1,0 +1,39 @@
+﻿@{
+    
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title></title>
+       <link href="~/Content/w3css.css" rel="stylesheet" type="text/css" />
+       
+    </head>
+    <body>
+        <div class="w3-bar w3-white w3-card-4 w3-display-top w3-padding">
+  <a href="~/Default.cshtml" class="w3-bar-item w3-button  w3-padding w3-block w3-hover-blue w3-mobile"><i class="fa fa-home w3-margin-right"></i>Home</a>
+ <a href="~/About"  class="w3-bar-item w3-button  w3-padding w3-block w3-hover-blue w3-mobile">About</a>
+  <a href="~/Contact"  class="w3-bar-item w3-button  w3-padding w3-block w3-hover-blue w3-mobile">Contact</a>    
+
+
+@if (WebSecurity.IsAuthenticated) {
+        <text>
+              <a  href="~/Account/Manage" class="w3-bar-item w3-button  w3-padding w3-block w3-hover-blue w3-mobile" title="Manage">@WebSecurity.CurrentUserName</a>!
+                                <form id="logoutForm" action="~/Account/Logout" method="post">
+                                    @AntiForgery.GetHtml()
+                                    <a href="javascript:document.getElementById('logoutForm').submit()" class="w3-bar-item w3-button  w3-padding w3-block w3-hover-blue w3-mobile">Log out</a>
+                                </form>
+   </text>
+                }
+                else {
+                           
+                    <a  href="~/Account/Register"  class="w3-bar-item w3-button  w3-padding w3-block w3-hover-blue w3-mobile">Register</a>
+                     <a href="~/Account/Login"  class="w3-bar-item w3-button  w3-padding w3-block w3-hover-blue w3-mobile">Log in</a>
+                            
+}
+            </div>
+
+    </body>
+</html>

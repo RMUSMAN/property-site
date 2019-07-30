@@ -1,0 +1,90 @@
+﻿@{
+    Layout = "~/_SiteLayout.cshtml";
+    Page.Title = "Home Page";
+      var db=Database.Open("StarterSite");
+   var featured="SELECT * FROM UserProfile WHERE STATE='Active' AND MODE='Featured' ";
+   var agency = db.Query(featured);
+
+}
+<style>
+#demo1{width:600px;height:200px;overflow:hidden; border:10px solid #fff;}
+#demo1 ul li{float:left; width: 170px; height:200px; margin-left:50px; margin-right: 50px  }
+#demo1 ul li img{display:block;}
+</style>
+
+<div class="w3-container w3-content" style="max-width:1400px;margin-top:120px; margin-left:50px; margin-right:40px">    
+  <!-- The Grid -->
+  <div class="w3-row">
+    <!-- Left Column -->
+    <div class="w3-col m3 w3-round">
+        <div class="w3-hide-medium w3-hide-small" style="width: 80%; float: left;">
+      <!-- Profile -->
+      @RenderPage("~/FeaturedAds/AdsLayout.cshtml")
+
+        </div>
+   
+   
+    
+      
+   
+    </div>
+    
+    <!-- Middle Column -->
+    <div class="w3-col m5 w3-small w3-card-4 w3-round" style="margin-left: 80px;max-width: 1400px;" >
+    
+      
+@RenderPage("~/propertyType/PropertyLayout.cshtml")
+ 
+  
+  
+   
+    </div>
+    
+    <!-- Right Column -->
+    <div class="w3-col m3 w3-round" style="margin-left: 5px; max-width: 1400px">
+    <div class="w3-center" style="width: 90%; float: right">
+          @RenderPage("Cities.cshtml")
+      <br>
+      
+    </div>
+      
+      
+    <!-- End Right Column -->
+    </div>
+    
+
+
+      
+  
+  </div>
+     
+<!-- End Page Container -->
+</div>
+ <form id="timeline2" action="~/FeaturedAds/TimeLine2.cshtml" method="get">
+        <input id="company" type="hidden"  name="company">
+            </form>
+
+
+
+ <script src="lib/jquery/jquery.kxbdmarquee.js"></script>
+<script>
+		(function(){
+			$("#demo1").kxbdMarquee({direction:"right"});
+		
+		})();
+	</script>
+<script>
+    $(document).ready(function () {
+
+        $("li.fea").click(function () {
+      
+            var sellId = $("#company").val($(this).attr("value"));
+           
+            $("#timeline2").submit();
+
+
+
+        });
+
+    });
+</script>

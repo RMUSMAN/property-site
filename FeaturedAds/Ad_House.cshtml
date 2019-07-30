@@ -1,0 +1,115 @@
+﻿@{
+   var db=Database.Open("StarterSite");
+   var featured="SELECT * FROM PROPERTY WHERE  TYPE='House' AND STATE='Active' AND MODE='Featured' ";
+   var result = db.Query(featured);
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title></title>
+        <style>
+            .house {display:none}
+        </style>
+    </head>
+    <body>
+
+
+<div class=" w3-card-4 w3-round" style="padding: 4px">
+    <div class="w3-row " style="margin-bottom: 4px" >
+      <div class="w3-center">
+  <a href="~/FHousesLayout.cshtml" title="Click to see all properties">   <label    class=" w3-left w3-text-blue w3-hover-text-red "> &nbsp; Featured House
+    </label> </a>
+          
+     </div>
+      
+    </div>
+        @if(result.Any())
+   {
+    foreach(var row in result)
+   {
+                  
+
+      <div class=" w3-display-container house w3-card-4">
+      <img src="~/@row.MIMG" alt="House Image" style="width:100%; height: 150px">
+      <div class=" w3-container w3-padding-16 w3-center">
+        <span class=" ">
+        <label class="w3-small w3-text-blue w3-center"><strong>@row.NAME</strong></label><br/>
+        <label class="w3-small w3-text-gray w3-center">@row.LOCATION</label><br/>
+         <label class="w3-large w3-text-red w3-center">@row.PRICE</label><br/>
+      <a href="~/FeaturedAds/FeaturedHouses.cshtml?id=@row.ID"  class="w3-button w3-small w3-teal w3-round w3-center" style="height: 30px">See More</a>
+        </span>
+      </div>
+    </div>
+
+    
+}
+}    
+
+else
+{
+    
+<div class=" w3-display-container house w3-card-4">
+      <img src="~/images/house2.jpg" alt="House Image" style="width:100%; height: 150px">
+      <div class=" w3-container w3-padding-16 w3-center">
+        <span class="w3-white  ">
+        <label class="w3-small w3-text-blue w3-center"><strong>HOUSE NAME</strong></label><br/>
+        <label class="w3-small w3-text-gray w3-center">House at vehari Comsats</label><br/>
+         <label class="w3-large w3-text-red w3-center">Rs 2.5 Million</label><br/>
+      <button class="w3-button w3-small w3-teal w3-round w3-center" style="height: 30px">See More</button>
+        </span>
+      </div>
+    </div>
+
+}
+              
+
+
+
+   <!-- Slideshow next/previous buttons -->
+    <div class="w3-container w3-blue  w3-xlarge">
+      <div class="w3-left" onclick="plusDivsH(-1)"><i class="fa fa-arrow-circle-left w3-hover-text-red"></i></div>
+      <div class="w3-right" onclick="plusDivsH(1)"><i class="fa fa-arrow-circle-right w3-hover-text-red"></i></div>
+    
+       
+     
+    </div>
+
+      
+
+
+  </div>
+
+<script>
+// Slideshow
+var slideIndexH = 1;
+showDivsH(slideIndexH);
+
+function plusDivsH(n) {
+  showDivsH(slideIndexH += n);
+}
+
+function currentDivH(n) {
+  showDivsH(slideIndexH = n);
+}
+
+function showDivsH(n) {
+  var i;
+  var x = document.getElementsByClassName("house");
+  var dots = document.getElementsByClassName("Hdots");
+  if (n > x.length) {slideIndexH = 1}    
+  if (n < 1) {slideIndexH = x.length} ;
+  for (i = 0; i < x.length; i++) {
+     x[i].style.display = "none";  
+  }
+  for (i = 0; i < dots.length; i++) {
+     dots[i].className = dots[i].className.replace(" w3-white", "");
+  }
+  x[slideIndexH-1].style.display = "block";  
+ 
+}
+</script>
+</body>
+</html>

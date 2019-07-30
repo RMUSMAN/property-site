@@ -1,0 +1,40 @@
+﻿@{
+    
+}
+
+<!DOCTYPE html>
+
+<title>W3.CSS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="~/Content/w3css.css">
+   <script src="~/js/jquery.js"></script>
+   <script src="~/js/w3.js"></script>
+
+<style>
+      a:active {
+        
+      background-color: #f00;
+    }
+</style>
+<body class="w3-light-gray">
+     
+   <div class="w3-top ">@RenderPage("~/header.cshtml")</div>
+<div class="w3-sidebar w3-bar-block w3-center w3-card-4  w3-card w3-light-gray w3-rightbar w3-border-grey" style="z-index: 0; width:160px; margin-top: 50px">
+  <h2 class="w3-text-blue w3-medium "><b>Admin</b></h2>
+    
+    <a href="~/Admin/Users.cshtml" class="w3-bar-item w3-hover-blue w3-white w3-text-blue-gray w3-button w3-topbar w3-bottombar w3-border-light-gray"><b>Users</b></a>
+  
+
+  <a href="~/Admin/Properties.cshtml" class="w3-bar-item w3-hover-blue w3-white w3-text-blue-gray w3-button w3-topbar w3-bottombar w3-border-light-gray"><b>Properties</b></a>
+  
+</div>
+
+<div class="w3-container" style="margin-left:220px">
+    @RenderBody()
+</div>
+
+
+
+</body>
+</html>

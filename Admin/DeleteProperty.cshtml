@@ -1,0 +1,439 @@
+﻿@{
+Layout = "~/_AdminLayout.cshtml";
+    Page.Title = "Delete Users";    
+
+    var Id="";
+    var id="";
+    var type="";    
+var name="";
+var city="";
+var location="";
+var price="";
+var year="";
+var area="";
+var description="";
+var beds="";
+var baths="";
+var store="";
+var kitchen="";
+var carparking="";
+var owner="";
+var email="";
+var contact="";
+var mode="";
+var purpose="";
+var state="";
+var Pid="";
+var likes="";
+var m="";
+var m1="";
+var m2="";
+var m3="";
+var m4="";
+var m5="";
+var m6="";
+var m7="";
+var m8="";
+var m9="";
+var m10="";
+var m11="";
+var m12="";
+
+
+
+
+
+
+
+ var db = Database.Open("starterSite");
+ 
+
+
+
+
+
+
+  if(!IsPost)
+    {
+        if(!Request.QueryString["ID"].IsEmpty() && Request.QueryString["ID"].IsInt())
+        {
+          Id = Request.QueryString["ID"];
+            
+            var dbCommand = "SELECT * FROM PROPERTY WHERE ID = @0";
+          var  data = db.QuerySingle(dbCommand, Id);
+            if(data != null) 
+            {
+       
+      type=data.TYPE;
+      name=data.NAME;
+      city=data.CITY;
+      location=data.LOCATION;
+      price=data.PRICE;
+      year=data.YEAR;
+      area=data.AREA;
+      description=data.DESCRIPTION;
+      beds=data.BEDROOMS;
+       kitchen=data.KITCHENS;
+      baths=data.BATHROOMS;
+      store=data.STOREROOMS;
+      carparking=data.CARPARKING;
+      owner=data.OWNER;
+      email=data.EMAIL;
+      contact=data.CONTACT;
+     purpose=data.PURPOSE;
+     state=data.STATE;
+     mode=data.MODE;
+     likes=data.LIKES;
+     m=data.MIMG;
+      m1=data.IMG1;
+       m2=data.IMG2;
+        m3=data.IMG3;
+         m4=data.IMG4;
+          m5=data.IMG5;
+           m6=data.IMG6;
+            m7=data.IMG7; 
+            m8=data.IMG8;
+             m9=data.IMG9;
+           m10=data.IMG10;
+            m11=data.IMG11; 
+            m12=data.IMG12;
+
+
+}}}
+
+if(IsPost)
+    {
+	 id = Request.Form["delp"];
+	  
+	var deleteCommand = "DELETE FROM PROPERTY WHERE ID = @0";
+	db.Execute(deleteCommand, id);
+	Response.Redirect("~/Admin/Properties.cshtml");
+}
+  
+  
+
+
+
+
+
+}
+
+
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title></title>
+          <script src="~/js/jquery.js"></script>
+      <script src="~/js/displayLayout.js"></script>
+        <style>
+           #scrolly{
+           
+            height: 110px;
+            overflow: auto;
+            overflow-y: hidden;
+            margin: 0 auto;
+            white-space: nowrap;
+            width: 100%;
+            background-color: #808080;
+            
+        }
+              #scrolly::-webkit-scrollbar {
+display: none;
+}
+      #scrolly img{
+            width: 100px;
+            height: 100px;
+            margin: 5px 1px 4px 4px;
+            display: inline;
+            border: 4px solid #fff;
+        }
+div.cover:hover{
+opacity:.7;
+}
+.upload{
+display:none;
+}
+div.cover:hover .upload{
+display:block;
+
+}
+    ul.detail{
+ margin-bottom:20px;
+  
+  
+  
+}
+
+             ul.detail li  { 
+        display: inline-block;
+      
+         width: 31.33%;
+            height: 140px;
+              margin-left:4px;
+                  margin-top:20px;  
+                 
+                  
+              } 
+
+           
+
+  #scroller::-webkit-scrollbar {
+display: none;
+             
+}
+</style>
+
+
+    </head>
+    <body>
+       
+        <div class=" w3-card-4  w-border w3-border-blue" style="margin-left: 200px; margin-right: 100px; max-width:1000px; margin-top:80px">
+
+
+
+        <div class="w3-border w3-card-4" style="float: right; margin-bottom: 15px; padding-bottom: 10px; ">
+         <form id="DelProperty" action="" method="post">
+<div class="w3-bar  w3-teal w3-center w3-small w3-padding">
+  <a id="purpose" href="#" style="width:33%" class="w3-bar-item w3-button w3-mobile"><b>Purpose-For @purpose</b> </a>
+  <a id="type" href="#" style="width:33%" class="w3-bar-item w3-button w3-mobile"><b>Property Type-@type</b></a>
+  <a id="city" href="#" style="width:33%" class="w3-bar-item w3-button w3-mobile"><b>Location-City @city</b></a>
+ 
+</div>
+<div class="w3-row  w3-border-blue" style="width:100%;  margin-top:5px; margin-bottom: 0px; max-width: 1400px">
+<div class=" w3-half" tyle="width:50%;">
+
+ <div id="future"  class=" w3-small  w3-round  "style="overflow-y: scroll; overflow-x: hidden ; width:100%; height: 730px; max-width: 1400px">
+    
+
+     <ul class="detail" >
+    
+           <li  >
+     <img class="view w3-round-large" src="~/@m1" alt="NO IMAGE" style="width:100%;height:140px " onclick="document.getElementById('modal01').style.display='block'"><br/>
+    
+     </li>
+     <li >
+ <div class="  w3-round-large w3-small w3-light-gray  " style="width:100%; height:140px " >
+    <img class="view w3-round-large" src="~/@m2" alt="NO IMAGE" style="width:100%;height:140px " onclick="document.getElementById('modal01').style.display='block'"><br/>
+   </div>
+     </li>
+     
+       <li >
+ <div class="  w3-round-large w3-small w3-light-gray  " style="width:100%; height:140px ">
+    <img class="view  w3-round-large" src="~/@m3" alt="~/images/house1.jpg" style="width:100%;height:140px " onclick="document.getElementById('modal01').style.display='block'"><br/>
+    </div>
+     </li>
+     <li >
+ <div class=" w3-round-large w3-small w3-light-gray  " style="width:100%; height:140px ">
+    <img class="view w3-round-large" src="~/@m4" alt="NO IMAGE" style="width:100%;height:140px " onclick="document.getElementById('modal01').style.display='block'"><br/>
+   </div>
+     </li>  
+     
+       <li>
+ <div class="  w3-round-large w3-small w3-light-gray " style="width:100%; height:140px ">
+    <img class="view w3-round-large" src="~/@m5" alt="NO IMAGE" style="width:100%;height:140px " onclick="document.getElementById('modal01').style.display='block'"><br/>
+    </div>
+     </li>
+       <li >
+ <div class="  w3-round-large w3-small w3-light-gray " style="width:100%; height:140px ">
+    <img class="view w3-round-large" src="~/@m6" alt="NO IMAGE" style="width:100%;height:140px " onclick="document.getElementById('modal01').style.display='block'"><br/>
+   </div>
+     </li>
+       <li >
+ <div class="  w3-round-large w3-small w3-light-gray  " style="width:100%; height:140px ">
+    <img class="view  w3-round-large" src="~/@m7" alt="NO IMAGE" style="width:100%;height:140px " onclick="document.getElementById('modal01').style.display='block'"><br/>
+    </div>
+     </li>
+       <li>
+ <div class=" w3-round-large w3-small w3-light-gray  " style="width:100%; height:140px ">
+    <img class="view w3-round-large"src="~/@m8" alt="NO IMAGE" style="width:100%;height:140px " onclick="document.getElementById('modal01').style.display='block'"><br/>
+    </div>
+     </li>
+       <li >
+ <div class="  w3-round-large w3-small w3-light-gray  " style="width:100%; height:140px ">
+    <img class="view w3-round-large" src="~/@m9" alt="NO IMAGE" style="width:100%;height:140px " onclick="document.getElementById('modal01').style.display='block'"><br/>
+    </div>
+     </li>
+       <li  >
+            <div class="  w3-round-large w3-small w3-light-gray  " style="width:100%; height:140px ">
+    <img class="view  w3-round-large" src="~/@m10"  style="width:100%;height:140px " onclick="document.getElementById('modal01').style.display='block'"><br/>
+   </div>
+     </li>
+       <li>
+ <div class="  w3-round-large w3-small w3-light-gray " style="width:100%; height:140px ">
+    <img class="view w3-round-large" src="~/@m11"  style="width:100%;height:140px " onclick="document.getElementById('modal01').style.display='block'"><br/>
+    </div>
+     </li>
+        <li >
+ <div class="  w3-round-large w3-small w3-light-gray " style="width:100%; height:140px ">
+    <img class="view w3-round-large" src="~/@m12"  style="width:100%;height:140px " onclick="document.getElementById('modal01').style.display='block'"><br/>
+    </div>
+     </li>
+     </ul>
+
+</div>
+
+ 
+</div>
+  <div class="w3-half">
+    
+      <div class="w3-white w3-text-grey ">
+       
+          <img  src="~/@m" style="width:100%; height: 200px" alt="Avatar"><br/>
+        <div class="w3-container w3-margin-top">
+           
+      <div class="w3-col s8">
+        <p  class=" w3-left w3-text-blue "><strong>@name</strong></p>
+       </div>
+      <div class="w3-col s4">
+      <span >
+      <p class="w3-center w3-right w3-padding w3-small w3-text-blue">@likes</p>
+          <p class="w3-center w3-right  w3-large"><i class="fa fa-thumbs-up w3-hover-text-red"></i></p>
+       </span>
+       </div>
+     <p  class="w3-left w3-small w3-text-black" style="margin-top:-5px;">@location</p><br/>
+     
+      
+       <h3 class="w3-row w3-text-red"><strong>Rs :</strong> @price</h3>
+      
+    <p   class="w3-small w3-text-blue" >@description</p> 
+     <table class="w3-table w3-bottombar   w3-small">
+    <tr>
+    <h3 class="w3-text-blue w3-margin-left w3-medium"><b>Property Details</b> </h3>
+    </tr>
+    
+    
+      <tr>
+      <td><b>area</b></td>
+      <td >@area</td>
+       <td><b>bedrooms</b></td>
+        <td >@beds</td>
+    </tr>
+    <tr>
+      <td><b>bathrooms</b></td>
+      <td >@baths</td>
+      <td ><b>kitchen</b></td>
+       <td >@kitchen</td>
+    </tr>
+    <tr>
+      <td ><b>storerooms</b></td>
+      <td >@store</td>
+      <td><b>carparking</b></td>
+       <td >@carparking</td>
+       
+    </tr>
+    
+    <tr>
+     <td><b>Khaali.pk.id</b></td>
+      <td >@Id</td>
+     <td><b>Construction</b></td>
+      <td >@year</td>
+    </tr>
+  </table>
+  <div class="w3-responsive">
+  <div class="w3-row w3-small">
+      <div class="w3-half w3-center " style="width:40%; padding-left:0%;">
+      <h4 class="w3-text-blue w3-padding  w3-left w3-medium"><strong>ContentInfo</strong></h4>   <br/>  
+       <p ><button class="w3-btn w3-center w3-small w3-block w3-blue "style="height:30px; margin-top:4px;" >Owner Name</button> </p>
+     <p ><button class="w3-btn w3-small w3-block w3-orange " style="height:30px; margin-top:4px;">ContactNo</button> </p>
+        <p ><button class="w3-btn w3-small w3-block w3-green" style="height:30px; margin-top:4px;">Send Email</button> </p>
+       </div>
+      <div class="w3-half w3-left w3-small w3-block " style="width:58%; margin-right:-12px">
+       <h4 class="w3-text-white w3-padding  w3-medium"><strong>Details</strong></h4>
+        <p  class="w3-padding" style="margin-top:0px;"><b>@name</b> </p>
+        <p  class="w3-padding" style="margin-top:0px;"><b>@contact</b></p>
+        <p  class="w3-padding" style="margin-top:0px;"><b>@email</b></p>
+      </div>
+    </div>  
+	</div>
+  
+    
+    
+    
+    
+        </div>
+       
+  </div>
+  
+   <input name="delP" type="hidden" value="@Id">
+</div>
+
+
+
+    <br/>
+    <br/>
+
+
+
+</div>
+             </form>
+
+            <div class="w3-row-padding w3-container w3-blue w3-card-4 w3-round w3-border-red w3-small w3-padding-16">
+    <form id="state" action="~/Admin/State.cshtml" method="POST">
+  <div class="w3-quarter">
+    <input type="hidden" value="@Id" name="stateId">
+    <select  class="w3-select w3-border w3-block"  name="state" style="width: 100%">
+    <option value="@state" selected>@state</option>
+    <option value="Active">active</option>
+    <option value="Deactive">Deactive</option>
+  </select>
+   </div>
+ <div class="w3-quarter ">
+   <select  class="w3-select w3-border w3-block"  name="mode"  style="width: 100%">
+   <option value="@mode" selected>@mode</option>
+   <option value="Featured">Featured</option>
+       <option value="Unfeatured">Unfeatured</option>
+     </select>
+              </div> 
+  <div class="w3-quarter">
+     <button type="submit" class="w3-btn w3-left  w3-teal">update</button>
+  </div>
+ </form>
+ <div class="w3-quarter">
+   <button id="DelBtn" type="submit" class="w3-btn  w3-right w3-red">Delete</button>
+        
+  </div>
+</div>
+</div>
+
+
+
+
+
+<div id="modal01" class="w3-modal" onclick="this.style.display='none'">
+    <span class="w3-button w3-hover-red w3-xlarge w3-display-topright">&times;</span>
+    <div class="w3-modal-content w3-animate-zoom">
+      <img id="m0" class="largeImage" src="" style="width:100%" alt="no image">
+    </div>
+  </div>
+   </div>
+            
+
+
+
+      
+        <script>
+            $(document).ready(function () {
+                $('#DelBtn').click(function () {
+                    $('#DelProperty').submit();
+                });
+
+
+            });
+
+        </script>
+
+
+
+
+
+
+        
+
+
+
+    </body>
+</html>

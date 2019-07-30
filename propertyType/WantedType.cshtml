@@ -1,0 +1,97 @@
+﻿@{
+ //    Layout = "~/propertyType/_PropertyLayout.cshtml";
+ //   Page.Title = "Wanted";
+}
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title></title>
+         <script src="~/js/FCities.js"></script>
+    </head>
+    <body>
+        <form style="max-width: 1400px">
+             <div class=" w3-row w3-margin-bottom" style="box-shadow: none;">
+                  <div class="w3-half w3-center  w3-light-gray" style="margin: auto; width: 50%;">
+                    
+      <select id="commcity" class="w3-select w3-border w3-round  w3-card" name="city" style="width: 99%; margin-top: 4px; margin-bottom: 4px; margin-left: 2px;margin-right: 2px; height: 35px ">
+    <option value="" disabled selected>Select City</option>
+  @foreach(var cit in db.Query(select_sql))
+{
+       <option value="@cit.NAME">@cit.NAME</option>
+}      
+  </select>
+</div>                
+                
+         <div class="w3-half w3-center  w3-light-gray" style="margin: auto;width: 50%; ">              
+        <select id="commloc"  class="w3-select w3-border w3-round  w3-card" name="location" style="width: 99%; margin-top: 4px; margin-bottom: 4px; margin-left: 2px;margin-right: 2px; height: 35px ">  
+        <option value="" disabled selected>Select location</option>
+        </select>  
+        </div> 
+ <input id="stype" class="w3-light-gray w3-center  w3-tiny w3-hide"  type="text"  value="" name="showDetail" style="height: 1px; width: 2px ; margin-left: 2px;" >
+      
+</div>
+
+<ul id="quad" class="  w3-white w3-text-blue w3-padding-bottom">
+    
+            <li class="w3-center w3-hover-shadow" onclick="Property_Form.submit();">
+<img class="properties" src="~/images/HOUSE.jpg" alt="property" style="width: 80px; height: 80px;"><br/>
+                <label class="w3-center"><strong>House</strong></label>
+           </li>
+  
+    <li class="w3-center w3-hover-shadow" onclick="Property_Form.submit();">
+<img class="properties" src="~/images/SHOPS.jpg" alt="property" style="width: 80px; height: 80px;"><br/>
+          <label class="w3-center"><strong> Shop </strong></label>
+           </li>
+            
+    <li class="w3-center w3-hover-shadow" onclick="Property_Form.submit();">
+<img class="properties" src="~/images/HOSTELS.jpg" alt="property" style="width: 80px; height: 80px;"><br/>
+          <label class="w3-center"><strong>Hostel</strong></label>
+    
+               </li>
+            <li class="w3-center w3-hover-shadow" onclick="Property_Form.submit();">
+<img class="properties" src="~/images/HOUSE.jpg" alt="property" style="width: 80px; height: 80px;"><br/>
+                <label class="w3-center"><strong>House</strong></label>
+           </li>
+  
+    <li class="w3-center w3-hover-shadow" onclick="Property_Form.submit();">
+<img class="properties" src="~/images/SHOPS.jpg" alt="property" style="width: 80px; height: 80px;"><br/>
+          <label class="w3-center"><strong> Shop </strong></label>
+           </li>
+            
+    <li class="w3-center w3-hover-shadow" onclick="Property_Form.submit();">
+<img class="properties" src="~/images/HOSTELS.jpg" alt="property" style="width: 80px; height: 80px;"><br/>
+          <label class="w3-center"><strong>Hostel</strong></label>
+    
+               </li>
+            <li class="w3-center w3-hover-shadow" onclick="Property_Form.submit();">
+<img class="properties" src="~/images/HOUSE.jpg" alt="property" style="width: 80px; height: 80px;"><br/>
+                <label class="w3-center"><strong>House</strong></label>
+           </li>
+  
+    <li class="w3-center w3-hover-shadow" onclick="Property_Form.submit();">
+<img class="properties" src="~/images/SHOPS.jpg" alt="property" style="width: 80px; height: 80px;"><br/>
+          <label class="w3-center"><strong> Shop </strong></label>
+           </li>
+            
+    <li class="w3-center w3-hover-shadow" onclick="Property_Form.submit();">
+<img class="properties" src="~/images/HOSTELS.jpg" alt="property" style="width: 80px; height: 80px;"><br/>
+          <label class="w3-center"><strong>Hostel</strong></label>
+    
+               </li>
+       <li class="w3-center w3-hover-shadow" onclick="Property_Form.submit();">
+<img class="properties" src="~/images/HOUSE.jpg" alt="property" style="width: 80px; height: 80px;"><br/>
+                <label class="w3-center"><strong>House</strong></label>
+            </li>
+            
+    <li class="w3-center w3-hover-shadow" onclick="Property_Form.submit();">
+<img class="properties" src="~/images/icon.png" alt="property">
+           </li>
+       </ul>
+
+            </form>
+ </body>
+</html>

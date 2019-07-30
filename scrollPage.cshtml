@@ -1,0 +1,165 @@
+﻿@{
+var sell_id="";    
+
+     var db=Database.Open("khaali");
+    var sql="SELECT * FROM Sell";
+    var shani="";
+
+    if(IsPost)
+    {
+    sell_id =Request.Form["showDetail"];
+  // sell_id=@sellId;
+//  shani=sell_id;
+
+      Response.Redirect("~/property_Detail.cshtml?id="+sell_id);
+    
+    
+    }
+
+}
+<!DOCTYPE html>
+
+<title>W3.CSS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<style>
+    #header {
+        box-shadow: 0px 1px 1px #c4bdbd;
+    }
+           div #side{
+ padding: 0;
+  margin-top: 8px;
+ 
+}
+
+          div #side li {       
+                width: 23%;
+                height: 70px;
+               
+                   padding-bottom : 4px;
+                  display:inline;
+                  margin-left:4px;
+                  margin-top:4px; 
+                  background-color: #fff;
+            }
+            img.properties {
+            height: 100%;
+            width:100%;
+   
+            }
+    div #side li a{
+       text-decoration: none;
+      }
+
+</style>
+
+<style>
+    ::-webkit-scrollbar {
+display: none;
+}
+    
+</style>
+<body class="w3-light-grey">
+
+
+<div class="w3-top">
+  @RenderPage("~/header.cshtml");
+</div>
+  
+ <p> 
+
+
+   
+
+
+
+<span class='arrow-left w3-display-topleft w3-btn w3-circle w3-xlarge w3-blue w3-hover-red' style="margin-top:160px; z-index:4; display:block; position:absolute;"><i class="fa fa-arrow-left"></i></span>
+<span class='arrow-right w3-display-topright w3-btn w3-circle w3-xlarge  w3-blue w3-hover-red' style="margin-top:160px; z-index:4; display:block; position:absolute;"><i class="fa fa-arrow-right"></i></span>
+
+</p>
+    
+<div id=""  class="scroll w3-display-container w3-padding  " style="width: 100%; overflow-x:auto; white-space: nowrap; margin-top:80px;  overflow-y:hidden;">
+  
+ <form id="show" method="post">
+    
+         <h1 style="display: inline">ID is @shani</h1>
+     <br/>
+       <input id="search-type" type="number" value="   "   name="showDetail"> 
+     </form> 
+    <br/>
+       @foreach(var row in db.Query(sql))
+          {
+           
+<ul id="set" style="display: inline; padding-left: 10px">
+           <li id="atag" class="w3-hover-shadow" style="width: 150px; height: 200px; display: inline-block;" value="@row.Sell_ID"  onclick="@Href("~/property_Detail", @row.Sell_ID)">
+
+    <div class="w3-card-2 w3-round-large w3-small w3-white w3-hover-shadow" style="width:150px; height:200px; display: inline-block;">
+    <img class=" w3-bottombar w3-border-blue w3-round-large" src="@row.IMAGE" alt="Norway" style="width:100%; height:70% ">
+    <div class="w3-container w3-center">
+      <p class="w3-text-blue">@row.NAME</p>
+      <p>@row.PRICE</p>
+    </div>
+  </div>
+  
+  </li>
+    </ul >
+          }
+ 
+</div>
+        
+    <div class="w3-row w3-margin-top w3-margin-left">
+<div class="w3-col m3">
+      <!-- Profile -->
+      @RenderPage("AdHouse.cshtml")
+  <br/>
+  <br/>
+  <br/>
+     
+     @RenderPage("AdProjects.cshtml")
+   
+   
+   
+   
+   
+    </div>
+        
+        <div>
+            @RenderPage("property_Detail.cshtml")
+      
+    </div>
+        
+        
+        
+        
+            </div>
+    <script>
+    $("#set li").click(function(){
+ var sellId = $("#search-type").val($(this).attr("value"));
+    $("#show").submit();
+     alert($("#search-type").val());
+});
+          $.ajax({
+                type: "POST",
+                url: "~/scrollPage",
+                data: sellId,
+                datatype: "html",
+                success: function (data) {
+                    $('#result').html(data);
+                }
+            });
+</script>
+
+<script>
+$(document).ready(function(){
+    $(".arrow-left").click(function(){
+        $(".scroll").animate({scrollLeft: "-="+150});
+    });
+    $(".arrow-right").click(function(){
+        $(".scroll").animate({scrollLeft: "+="+150});
+    });        
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,12 @@
+﻿@{
+      WebSecurity.RequireAuthenticatedUser();
+
+        Layout = "~/_SiteLayout.cshtml";
+    Page.Title = "Manage Account";
+}
+
+
+        <form class="w3 contaniner w3-large w3-display-middle">
+            <p class="w3-large ">Hello! <span>@WebSecurity.CurrentUserName</span>This Page is Not Devleoped </p>
+            </form>
+    

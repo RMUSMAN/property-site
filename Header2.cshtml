@@ -1,0 +1,392 @@
+﻿@{
+    
+
+
+   var db=Database.Open("StarterSite");
+  var sql="Select * FROM UserProfile WHERE UserId= @0";
+  var row= db.QuerySingle(sql , WebSecurity.CurrentUserId);
+  
+ 
+
+}
+<!DOCTYPE html>
+<html lang="en">
+
+       
+
+<head>
+    <title>khaali.com</title>
+<meta charset="utf-8" />
+       <link rel="stylesheet" href="~/css/w3css.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+ 
+ <style>
+      html,body,h1,h2,h3,h4,h5 
+{font-family: "Roboto", sans-serif}
+
+.Slist
+            {
+           height:60px;
+            margin:-5px;
+            
+            }
+  #Simg
+        {
+        width:60px;
+       height:80%;
+       
+        }
+  .Sp
+  {
+  margin-top:-2px;
+  }
+    .Sa
+  {
+  text-decoration:none;
+  }     
+  
+.w3-bar a.Dnav
+{
+width:25%;
+}
+
+  .Dlist
+            {
+            margin:-4px;
+            
+            }
+            
+         #Dimg
+        {
+        width:100%;
+        height:110px;
+       
+        }
+		
+.w3-table{
+	margin-left:-8px;
+	}
+        
+   #header {
+        box-shadow: 0px 2px 10px #c4bdbd;
+    }
+     
+
+ a{
+     text-decoration:none;
+     }
+     
+     
+     
+   #header {
+        box-shadow: 0px 1px 1px #c4bdbd;
+    }
+     
+</style>
+    
+
+  </head>
+<body>
+<div class="w3-sidebar w3-bar-block  w3-gray" style="z-index:1000; margin-top:0px; width: 310px; position: absolute; " id="mySidebar">
+ <div class="w3-white">
+  <a href="~/Default.cshtml" class="w3-bar-item w3-button w3-white w3-right w3-hover-white"  onclick="w3_close()" style="height: 50px; margin-bottom: 4px; padding: 10px"><img src="~/images/khaali1.png" alt="HOME" style="width: 200px; height: 50px; margin-left: 40px;  margin-top: -12px"></img> </a>
+     </div>
+ <br/>
+    @if (WebSecurity.IsAuthenticated) {
+        <div class="w3-container w3-row w3-blue-gray" style="height: 110px">
+ 
+    <div class="w3-col s4">
+      <img src="~/@row.Image" class="w3-margin-right" style="width:70px; height:70px; float: left">
+    </div>
+    <div class="w3-col s8 w3-bar">
+      <span><strong>@row.Name</strong></span><br>
+
+      <a href="~/Timeline.cshtml" class="w3-bar-item w3-large w3-text-white"><i class="fa fa-cog"></i></a>
+    </div>
+  </div>
+}
+    
+  <table class="w3-table">
+    <tr>
+    <h4 class="w3-text-blue w3-margin-left w3-small"><b>Sale</b> </h4>
+    </tr>
+    <tr>
+<td> 
+  <div class="Slist  w3-round w3-card w3-white w3-center w3-hover-shadow">
+   <a class="Sa" href="~/Forms/HouseForm.cshtml">
+     <img id="Simg" class="  w3-round" src="~/images/HOUSE.jpg"
+     alt="no img" ><br/>
+     <p class="Sp w3-text-blue w3-tiny " >House</p>
+  </a>
+ </div>
+</td>
+  <td> 
+  <div class="Slist  w3-round w3-card w3-white w3-center w3-hover-shadow">
+   <a class="Sa" href="~/Forms/FlatForm.cshtml">
+     <img id="Simg" class="  w3-round" src="~/images/FLAT.jpg"
+     alt="no img" ><br/>
+     <p class="Sp w3-text-blue w3-tiny " >Flat</p>
+  </a>
+ </div>
+</td>
+ <td> 
+  <div class="Slist  w3-round w3-card w3-white w3-center w3-hover-shadow">
+   <a class="Sa" href="~/Forms/OfficeForm.cshtml">
+     <img id="Simg" class="  w3-round" src="~/images/OFFICE1.jpg"
+     alt="no img" ><br/>
+     <p class="Sp w3-text-blue w3-tiny " >Office</p>
+  </a>
+ </div>
+</td>
+  <td> 
+  <div class="Slist  w3-round w3-card w3-white w3-center w3-hover-shadow">
+   <a class="Sa" href="~/Forms/LandForm.cshtml">
+     <img id="Simg" class="  w3-round" src="~/images/LAND1.jpg"
+     alt="no img" ><br/>
+     <p class="Sp w3-text-blue w3-tiny " >Land</p>
+  </a>
+ </div>
+</td>
+    </tr>
+    <tr>
+<td> 
+  <div class="Slist  w3-round w3-card w3-white w3-center w3-hover-shadow">
+   <a class="Sa" href="~/Forms/ShopForm.cshtml">
+     <img id="Simg" class="  w3-round" src="~/images/SHOP1.jpg"
+     alt="no img" ><br/>
+     <p class="Sp w3-text-blue w3-tiny " >Shop</p>
+  </a>
+ </div>
+</td>
+ 
+ </tr>
+   
+   </table>
+  <br/>
+ 
+   <table class="w3-table">
+    <tr>
+    <h4 class="w3-text-blue w3-margin-left w3-small"><b>Rent</b> </h4>
+    </tr>
+    <tr>
+<td> 
+  <div class="Slist  w3-round w3-card w3-white w3-center w3-hover-shadow">
+   <a class="Sa" href="~/FormRent/houseForm.cshtml">
+     <img id="Simg" class="  w3-round" src="~/images/HOUSE.jpg"
+     alt="no img" ><br/>
+     <p class="Sp w3-text-blue w3-tiny " >House</p>
+  </a>
+ </div>
+</td>
+  <td> 
+  <div class="Slist  w3-round w3-card w3-white w3-center w3-hover-shadow">
+   <a class="Sa" href="~/FormRent/FlatForm.cshtml">
+     <img id="Simg" class="  w3-round" src="~/images/FLAT.jpg"
+     alt="no img" ><br/>
+     <p class="Sp w3-text-blue w3-tiny " >Flat</p>
+  </a>
+ </div>
+</td>
+ <td> 
+  <div class="Slist  w3-round w3-card w3-white w3-center w3-hover-shadow">
+   <a class="Sa" href="~/FormRent/OfficeForm.cshtml">
+     <img id="Simg" class="  w3-round" src="~/images/OFFICE1.jpg"
+     alt="no img" ><br/>
+     <p class="Sp w3-text-blue w3-tiny " >Office</p>
+  </a>
+ </div>
+</td>
+  <td> 
+  <div class="Slist  w3-round w3-card w3-white w3-center w3-hover-shadow">
+   <a class="Sa" href="~/FormRent/LandForm.cshtml">
+     <img id="Simg" class="  w3-round" src="~/images/LAND1.jpg"
+     alt="no img" ><br/>
+     <p class="Sp w3-text-blue w3-tiny " >Land</p>
+  </a>
+ </div>
+</td>
+    </tr>
+    <tr>
+<td> 
+  <div class="Slist  w3-round w3-card w3-white w3-center w3-hover-shadow">
+   <a class="Sa" href="~/FormRent/hostelForm.cshtml">
+     <img id="Simg" class="  w3-round" src="~/images/Hostel.jpg"
+     alt="no img" ><br/>
+     <p class="Sp w3-text-blue w3-tiny " >Hostel</p>
+  </a>
+ </div>
+</td>
+ 
+ <td> 
+  <div class="Slist  w3-round w3-card w3-white w3-center w3-hover-shadow">
+   <a class="Sa" href="~/FormRent/UpForm.cshtml">
+     <img id="Simg" class="  w3-round" src="~/images/UP.jpg"
+     alt="no img" ><br/>
+     <p class="Sp w3-text-blue w3-tiny " >Uper Portion</p>
+  </a>
+ </div>
+</td>
+  <td> 
+  <div class="Slist  w3-round w3-card w3-white w3-center w3-hover-shadow">
+   <a class="Sa" href="~/FormRent/LpForm.cshtml">
+     <img id="Simg" class="  w3-round" src="~/images/LP4.jpg"
+     alt="no img" ><br/>
+     <p class="Sp w3-text-blue w3-tiny " >Lower Portion</p>
+  </a>
+ </div>
+</td>
+        <td> 
+  <div class="Slist  w3-round w3-card w3-white w3-center w3-hover-shadow">
+   <a class="Sa" href="~/FormRent/PayingGuest.cshtml">
+     <img id="Simg" class="  w3-round" src="~/images/PG5.jpg"
+     alt="no img" ><br/>
+     <p class="Sp w3-text-blue w3-tiny " >Paying Guest</p>
+  </a>
+ </div>
+</td>
+    </tr>
+    <tr>
+
+  
+ 
+        <td> 
+  <div class="Slist  w3-round w3-card w3-white w3-center w3-hover-shadow">
+   <a class="Sa" href="~/FormRent/ShopForm.cshtml">
+     <img id="Simg" class="  w3-round" src="~/images/SHOP1.jpg"
+     alt="no img" ><br/>
+     <p class="Sp w3-text-blue w3-tiny " >Shop</p>
+  </a>
+ </div>
+</td>
+    </tr>
+      </table>
+       <br/>
+  
+  <table class="w3-table">
+    <tr>
+    <h4 class="w3-text-blue w3-margin-left w3-small"><b>Project</b> </h4>
+    </tr>
+    <tr>
+<td> 
+  <div class="Slist  w3-round w3-card w3-white w3-center w3-hover-shadow">
+   <a class="Sa" href="~/Commercial/CommHouse.cshtml">
+     <img id="Simg" class="  w3-round" src="~/images/HOUSE.jpg"
+     alt="no img" ><br/>
+     <p class="Sp w3-text-blue w3-tiny " >House</p>
+  </a>
+ </div>
+</td>
+  <td> 
+  <div class="Slist  w3-round w3-card w3-white w3-center w3-hover-shadow">
+   <a class="Sa" href="~/Commercial/CommFlat.cshtml">
+     <img id="Simg" class="  w3-round" src="~/images/FLAT.jpg"
+     alt="no img" ><br/>
+     <p class="Sp w3-text-blue w3-tiny " >Flat</p>
+  </a>
+ </div>
+</td>
+ <td> 
+  <div class="Slist  w3-round w3-card w3-white w3-center w3-hover-shadow">
+   <a class="Sa" href="~/Commercial/CommOffice.cshtml">
+     <img id="Simg" class="  w3-round" src="~/images/OFFICE1.jpg"
+     alt="no img" ><br/>
+     <p class="Sp w3-text-blue w3-tiny " >Office</p>
+  </a>
+ </div>
+</td>
+  <td> 
+  <div class="Slist  w3-round w3-card w3-white w3-center w3-hover-shadow">
+   <a class="Sa" href="~/Commercial/CommLand.cshtml">
+     <img id="Simg" class="  w3-round" src="~/images/LAND1.jpg"
+     alt="no img" ><br/>
+     <p class="Sp w3-text-blue w3-tiny " >Land</p>
+  </a>
+ </div>
+</td>
+    </tr>
+    <tr>
+<td> 
+  <div class="Slist  w3-round w3-card w3-white w3-center w3-hover-shadow">
+   <a class="Sa" href="~/Commercial/CommShop.cshtml">
+     <img id="Simg" class="  w3-round" src="~/images/SHOP1.jpg"
+     alt="no img" ><br/>
+     <p class="Sp w3-text-blue w3-tiny " >Shop</p>
+  </a>
+ </div>
+</td>
+  
+ </tr>
+   
+   </table>
+
+
+
+ </div>
+  
+      <div class="w3-overlay w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" id="myOverlay"> </div>
+
+    
+<div id="header" class="w3-bar w3-top  w3-border-light-gray w3-padding  w3-white  " style="height: 50px">
+<div class="w3-quarter">
+  <a  class="w3-bar-item w3-button w3-center w3-hover-white"><i class="fa fa-bars w3-xlarge w3-left" onclick="w3_open()"></i></a>
+  <a href="~/Default.cshtml" class="w3-bar-item w3-button w3-margin-left w3-hover-white" title="Home" style="width: 200px"><img src="~/images/khaali1.png" alt="HOME" style="width: 200px; height: 50px; margin-top: -16px"></img></a>
+   </div>
+  <div class="w3-half w3-center ">
+   <form action="~/Search.cshtml" method="GET">
+  <span style="width:80%; float: right; margin-right: 20px;" >
+  <input type="text" class="w3-bar-item w3-small w3-text-black w3-white w3-border w3-border-gray w3-opacity  w3-margin-left w3-round-small" name="search" placeholder="Enter anything" style="width:80%;  height:30px" required>
+<button type="submit" class="w3-button w3-hover-white  " style="margin-top:-8px; margin-left:-15px;"><i class="fa fa-search w3-padding w3-center w3-light-gray w3-white w3-round-small w3-border w3-left w3-small " style="width:70px; height:30px"></i></button></span>
+</form>
+</div>
+    
+
+<div class="w3-quarter w3-center w3-small">
+  @if (WebSecurity.IsAuthenticated) {
+    
+
+ if(Roles.IsUserInRole(WebSecurity.CurrentUserName, "Admin"))
+{
+   <a href="~/Admin/Users.cshtml" class="w3-bar-item w3-small w3-button w3-left w3-text-blue" title="Setting"><strong>@row.Name</strong></a>
+   
+}
+else
+{
+     <a href="~/Timeline.cshtml" class="w3-bar-item w3-button w3-small w3-left w3-text-blue" title="Setting"><strong>@row.Name</strong></a>
+ 
+}
+
+<form id="logoutForm" action="~/Account/Logout" method="post">
+                                    @AntiForgery.GetHtml()
+   <a href="javascript:document.getElementById('logoutForm').submit()" class="w3-bar-item w3-small w3-button w3-right" title="Sign out"><i class="fa fa-sign-out"></i> Logout</a>
+ </form>
+ }
+ else
+ {
+     <a href="~/Account/Login.cshtml" class="w3-bar-item w3-button w3-small w3-left" title="Log in"><i class="fa fa-sign-in"></i> Login</a>
+  
+ }
+     
+   <a href="~/Forms/HouseForm.cshtml" class="w3-bar-item w3-button w3-small  w3-margin-left" title="Upload"><i class="fa fa-upload"></i> Upload</a>
+  </div>
+
+</div>
+    
+    
+      <script>
+  $(document).ready(function() {
+    $( document ).tooltip();
+  } );
+  </script>  
+<script>
+function w_open() {
+    document.getElementById("mySidebar").style.display = "block";
+    document.getElementById("myOverlay").style.display = "block";
+}
+function w_close() {
+    document.getElementById("mySidebar").style.display = "none";
+    document.getElementById("myOverlay").style.display = "none";
+}
+</script>
+          
+</body>
+</html>

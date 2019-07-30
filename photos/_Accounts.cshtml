@@ -1,0 +1,71 @@
+﻿@{
+     Layout = "~/_SiteLayout.cshtml";
+    Page.Title = "Login";
+}
+<!DOCTYPE html>
+
+<title>W3.CSS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<body>
+    <div class="w3-row" style="padding-bottom: 50px;">
+   <div class="w3-col m3 w3-round" style=" margin-top:100px">
+        <div class="w3-hide-medium w3-hide-small" style="width: 80%; float: left;">
+      <!-- Profile -->
+      @RenderPage("~/FeaturedAds/AdsLayout.cshtml")
+
+        </div>
+   
+   
+    
+      
+   
+    </div>
+     <div class="w3-col m7 w3-card-4 w3-white  w-border w3-border-blue " style="margin-left: 100px; margin-right: 100px; max-width:1000px; margin-top:100px; margin-bottom: 100px;">
+
+
+<div class="w3-row-padding " style="max-width:1400px; min-width:500px; ">
+  <h1 class="w3-text-blue"><b>Welcome to Khaali.Pk</b></h1>
+  <p class="w3-small" style="width:80%">Tabs are perfect for single page web applications, or for web pages capable of displaying different subjects. Click on the links below..</p>
+
+<div class="w3-half w3-center" style="width:40%;">
+ <img src="~/images/aa.png" class="w3-border" alt="Norway" style="padding:4px;width:90%">
+</div>
+
+<div class="w3-half" style="width:60%;">
+<div class="w3-bar w3-light-gray w3-white">
+
+ <a href="~/Account/Login.cshtml"> <button class="w3-bar-item w3-button w3-block w3-teal w3-round "  style="width:48%; margin-right:10px;">Login</button>
+     </a>
+
+ <a href="~/Account/Register.cshtml"> <button class="w3-bar-item w3-button w3-block  w3-teal w3-round"  style="width:49%">Register</button>
+ </a>
+</div>
+
+
+
+<div id="Paris" class="w3-margin-top city" >
+  @RenderBody()
+</div>
+</div>
+</div>
+       </div>
+       </div>
+    
+
+    @RenderSection("Scripts", required: false)
+
+<script>
+function openCity(cityName) {
+    var i;
+    var x = document.getElementsByClassName("city");
+    for (i = 0; i < x.length; i++) {
+       x[i].style.display = "none";  
+    }
+    document.getElementById(cityName).style.display = "block";  
+}
+</script>
+         
+</body>
+</html>
+

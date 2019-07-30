@@ -1,0 +1,244 @@
+﻿@{
+ WebSecurity.RequireAuthenticatedUser();    
+
+       var db = Database.Open("starterSite");
+       var select_sql="SELECT * FROM CITIES ";
+
+var profile="Select * FROM UserProfile WHERE UserId= @0";
+var data= db.QuerySingle(profile , WebSecurity.CurrentUserId);
+
+var rcount="SELECT COUNT(*) FROM PROPERTY WHERE PURPOSE='Rent' AND USERID= @0";
+var rent= db.QueryValue(rcount , WebSecurity.CurrentUserId);
+var scount="SELECT COUNT(*) FROM PROPERTY WHERE PURPOSE='sale' AND USERID= @0";
+var sale= db.QueryValue(scount , WebSecurity.CurrentUserId);
+var fcount="SELECT COUNT(*) FROM PROPERTY WHERE MODE='featured' AND USERID= @0";
+var featured= db.QueryValue(fcount , WebSecurity.CurrentUserId);
+var total=rent+sale;
+
+
+
+
+
+
+WebImage photoP=null;
+var pathP="";
+var company=data.Company;
+var image=data.Image;
+var name=data.Name;
+var founded=data.Founded;
+var city=data.City;
+var address=data.Address;
+var description=data.Description;
+var phone=data.Phone;
+var email=data.Email;
+var nophoto="images/no.png";
+
+if(IsPost)
+{
+    company=Request.Form["company"];
+   
+     name=Request.Form["name"];
+      founded=Request.Form["founded"]; 
+      address=Request.Form["address"];
+      city=Request.Form["city"];
+       description=Request.Form["description"];
+        phone=Request.Form["phone"];
+         email=Request.Form["email"];
+
+          photoP = WebImage.GetImageFromRequest("imageP");
+        if(photoP != null)
+        {
+           var  newFileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(photoP.FileName);
+            pathP = @"Upload_Pics\" + newFileName;
+             photoP.Save(@"~\" + pathP);
+
+
+              var updateQuerystring="UPDATE UserProfile SET Company = @0 , Image = @1 , Name = @2 , Founded = @3 , Address = @4 , City =@5 , Description = @6 , Phone = @7 , email = @8  WHERE Userid= @9 ";
+ db.Execute(updateQuerystring , company , pathP ,name , founded , address ,city , description , phone , email , WebSecurity.CurrentUserId );
+
+        }
+        else
+        {
+            var updateQuerystring="UPDATE UserProfile SET Company = @0  , Name = @1 , Founded = @2 , Address = @3 , City =@4 , Description = @5 , Phone = @6 , email = @7  WHERE Userid= @8 ";
+ db.Execute(updateQuerystring , company , name , founded , address ,city , description , phone , email , WebSecurity.CurrentUserId );
+
+
+        }
+
+        
+// Response.Write(@Href("~/Forms/HouseForm.cshtml"));
+ Response.Redirect("~/Timeline.cshtml");
+}
+}
+<!DOCTYPE html>
+
+<title>Dashbord</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+ <link href="~/css/w3css.css" rel="stylesheet">
+<link href="~/css/editprofile.css" rel="stylesheet">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+          
+<body class="w3-light-gray">
+  
+    <div class="Tmain w3-border w3-white" style="margin-top: 10px">
+
+        <form action="" enctype="multipart/form-data"  method="post" >
+          
+<div class="w3-row w3-bottombar w3-border-light-gray " >
+  <div class="w3-col w3-display-container w3-border w3-padding TcountImg w3-border-blue" >
+  <div class="">
+  <img id="blah" src="~/@image"  alt="No image">
+  <h2 class="upload  w3-display-topright">
+<label for="imgupload" class="w3-large  w3-white w3-btn w3-text-black " ><i class="fa fa-pencil w3-text-blue w3-large"></i></label>
+
+<input type="file" id="imgupload" class="w3-hide" name="imageP"   onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])" acccept="image/*">
+</h2>
+</div>
+  </div>
+  <div class="w3-col  TcountTotal">
+   <div class="w3-row-padding w3-margin-bottom ">
+    <div class="Tcount w3-col ">
+    <a class="w3-hover-shadow">
+      <div class=" w3-red w3-center">
+       
+          <h3 class=" w3-bottombar w3-center  w3-border-light-grey w3-small w3-padding">Total</h3>
+  
+        <div class=" w3-padding-24 ">
+        <p >@total</p>
+      </div>
+    </div>
+    </a>
+    </div>
+   <div class="Tcount w3-col">
+   <a class="w3-hover-shadow">
+      <div class="w3-hover-teal w3-card-4 w3-blue w3-center">
+       
+          <h3 class=" w3-bottombar w3-border-light-grey w3-small w3-padding">Rent</h3>
+  
+        <div class="w3-clear w3-center w3-padding-24">
+        <p >@rent</p>
+      </div>
+    </div>
+    </a>
+    </div>
+    <div class="Tcount w3-col" >
+    <a class="w3-hover-shadow" >
+      <div class="w3-hover-teal w3-card-4 w3-green w3-center">
+       
+          <h3 class=" w3-bottombar w3-border-light-grey w3-small w3-padding">Sale</h3>
+  
+        <div class="w3-clear w3-padding-24">
+        <p >@sale</p>
+      </div>
+    </div>
+    </a>
+    </div>
+    <div class="Tcount w3-col">
+    <a class="w3-hover-shadow" >
+      <div class="w3-hover-teal w3-card-4 w3-purple w3-center">
+       
+          <h3 class=" w3-bottombar w3-border-light-grey w3-small w3-padding" >Featured</h3>
+  
+        <div class="w3-padding-24">
+         <p >@featured</p>
+      </div>
+    </div>
+    </a>
+    </div>
+    </div>
+ </div>
+ </div>
+ 
+  <div class="w3-row w3-bottombar w3-border-light-grey" >
+  <label class="w3-small w3-text-blue w3-margin-left"><strong>Company Details</strong></label><br/>
+  <div class="w3-half   w3-padding">
+  
+   <input type="text" class="w3-input w3-border w3-round w3-card" type="text" name="company" value="@company" placeholder="Company Name" required>
+   <div class="w3-row" >
+  <div class="w3-half w3-left">
+ <select class="w3-select w3-border w3-small w3-round w3-card"   name="founded"  style="margin-bottom:8px"  required>
+    <option value="@founded"  selected>Founded in @founded </option>
+    <option value="2000">2000</option>
+    <option value="2001">2001</option>
+    <option value="2002">2002</option>
+    <option value="2003">2003</option>
+    <option value="2004">2004</option>
+    <option value="2005">2005</option>
+    <option value="2006">2006</option>
+    <option value="2007">2007</option>
+    <option value="2008">2008</option>
+    <option value="2009">2009</option>
+    <option value="2010">2010</option>
+    <option value="2011">2011</option>
+    <option value="2012">2012</option>
+    <option value="2013">2013</option>
+    <option value="2014">2014</option>
+    <option value="2015">2015</option>
+    <option value="2016">2016</option>
+    <option value="2017">2017</option>
+    <option value="2018">2018</option>
+  </select>
+
+</div>
+  <div class="w3-half w3-right" >
+<select id="city" class="w3-select w3-small w3-border w3-round  w3-card" name="city" style="margin-bottom:8px" required>
+    <option value="@city" selected>@city City</option>
+  @foreach(var cit in db.Query(select_sql))
+{
+       <option value="@cit.NAME">@cit.NAME</option>
+}      
+  </select>
+  </div>
+ 
+</div>
+  </div>
+      <!---half end-->
+ 
+ <div class="w3-half w3-padding   w3-leftbar w3-border-light-gray" >
+  <input type="text" class="w3-input w3-border w3-round w3-card" type="text" name="name" value="@name" placeholder="Owner Name" required>
+   <input type="text" class="w3-input w3-border w3-round w3-card" type="text" name="address" value="@address" placeholder="Address"  required>
+ </div>
+
+    <textarea type="text" class="w3-input w3-border w3-round w3-margin w3-card " name="description" value="@description" placeholder="About company"  style="width:96%">@description</textarea>
+
+    </div>   
+     
+
+  <div class="w3-row w3-bottombar w3-padding-bottom w3-border-light-grey" >
+  <label class="w3-small w3-text-blue w3-margin-left"><strong>Account Information</strong></label><br/>
+  <div class="w3-half   w3-padding">
+   <input type="text" class="w3-input w3-border w3-round w3-card" type="text" name="phone" value="@phone" placeholder="Contact number" required>
+    </div>
+ 
+       <div class="w3-half w3-padding   w3-leftbar w3-border-light-gray" >
+  <input type="text" class="w3-input w3-border w3-round w3-card" type="text" name="email" value="@email" placeholder="Email Adress "required>
+    
+       </div>  
+       
+        <button type="submit" class="w3-btn w3-teal w3-round w3-right w3-margin-right">Save Changes</button>
+      <a href="~/Timeline.cshtml" class="w3-btn w3-red w3-round w3-left w3-margin-left">Later</a>
+      
+   </div>
+
+        </form>
+
+
+
+    <!--row end-->
+
+
+    <div class="w3-row-padding w3-center w3-margin-bottom w3-margin-top">
+            <a class="w3-btn w3-btn w3-orange w3-round-xlarge" href="~/Account/Manage.cshtml">change passowrd</a>
+
+        </div>
+</div>
+
+
+
+
+
+        
+    
+    
+</body>
+</html>        

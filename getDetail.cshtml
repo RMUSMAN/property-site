@@ -1,0 +1,9 @@
+﻿@{
+      var db=Database.Open("StarterSite");
+    var id = UrlData[0] ?? "14";
+    var sql = @"SELECT * FROM PROPERTY WHERE ID = @0";
+    var item = db.QuerySingle(sql, id);
+    Json.Write(item, Response.Output);
+}
+
+

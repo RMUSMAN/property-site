@@ -1,0 +1,159 @@
+﻿@{
+    
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title></title>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    </head>
+    <body>
+
+         <style type="text/css">
+      #scrolly{
+           
+            height: 110px;
+            overflow: auto;
+            overflow-y: hidden;
+            margin: 0 auto;
+            white-space: nowrap;
+            width: 100%;
+            background-color: #808080;
+            
+        }
+              #scrolly::-webkit-scrollbar {
+display: none;
+}
+
+      #scrolly img{
+            width: 100px;
+            height: 100px;
+            margin: 5px 1px 4px 4px;
+            display: inline;
+            border: 4px solid #fff;
+        }
+    </style>
+
+
+   
+
+
+<div class=" w3-card-4   w3-display-right w3-margin-top" style="width: 60%; height: 500px ">
+    
+ <div class="w3-row w3-margin-bottom  ">
+    <div class="w3-half   w3-padding w3-border-right" style="width: 65%;  ">
+        <h6 class="w3-text-blue w3-topleft"><strong>Photo Gallary</strong></h6>
+     <img id="largeImage" src="~/images/house1.jpg " class="w3-border w3-padding" alt="no image" style="width: 98%; height: 300px" /></img>
+   
+    </div>
+     <div class="w3-half   "style="width: 35%; height: 20% ">
+         <div class="w3-row w3-opacity w3-text-grey">
+         <h6 class="w3-text-blue w3-topleft w3-margin-left"><strong>Summary</strong></h6>
+        <div class=" w3-margin-left  w3-small  w3-left" style="width: 50%">
+     <p><b> Khaali.PK ID </b></p>
+      <p><b> Type </b> </p>
+    <p><b> Status </b></p>
+      <p><b>Bedrooms </b></p> 
+       <p> <b>Bathrooms</b></p>
+      <p><b> Area </b></p>
+      <p><b> Price </b></p>
+       <p><b> Added </b></p>
+       <p><b> Ownership </b></p>
+       <p><b> Occupancy Status</b> </p>
+       <p><b> Construction Status</b> </p>
+             </div>
+       
+        <div class="w3-small w3-left" style="width: 40%">
+     <p>00001</p>
+    <p>House </p>
+    <p>For Sell </p>
+    <p>4 </p>
+    <p>5 </p>
+    <p>15 sqf</p>
+    <p>2 Billion  </p>
+    <p>10 Nov 2017</p>
+    <p>Freehold</p>
+    <p>Vacant </p>
+    <p>Complete</p>
+    
+    
+
+          
+    </div>
+    </div>
+    </div></div>
+    
+    <div id='scrolly' class=" thumbnails w3-container w3-display-bottommiddle w3-margin-top w3-center">
+      <img class="properties" src="~/images/house1.jpg"  alt="property" >
+ </img>
+
+         <img class="properties" src="~/images/house2.jpg"  alt="property" >
+ </img>
+        <img class="properties" src="~/images/house3.jpg"  alt="property" >
+ </img>
+         <img class="properties" src="~/images/house5.jpg"  alt="property" >
+ </img>
+        <img class="properties" src="~/images/house6.jpg"  alt="property" >
+ </img>
+    <img class="properties" src="~/images/p1.jpg"  alt="property" >
+ </img>
+      <img class="properties" src="~/images/p2.jpg"  alt="property" >
+ </img>
+      <img class="properties" src="~/images/p3.jpg"  alt="property" >
+ </img>
+      <img class="properties" src="~/images/p4.jpg"  alt="property" >
+ </img>
+      <img class="properties" src="~/images/p5.jpg"  alt="property" >
+ </img>
+      <img class="properties" src="~/images/p6.jpg"  alt="property" >
+ </img>
+
+
+    </div>
+         <p> 
+
+<span class='scrolly-left w3-display-bottomleft w3-btn w3-center  w3-xlarge w3-light-gray ' style=" z-index:4; display:block; position:absolute; width: 50px; height: 110px;"><i class="fa fa-arrow-left w3-display-left w3-text-blue w3-padding "></i></span>
+<span class='scrolly-right w3-display-bottomright w3-btn w3-center  w3-xlarge  w3-light-gray  ' style=" z-index:4; display:block; position:absolute; width: 50px; height: 110px"><i class="fa fa-arrow-right w3-display-left w3-text-blue w3-padding "></i></span>
+
+</p>
+
+</div>
+<script>
+$(document).ready(function(){
+    $(".scrolly-left").click(function(){
+        $("#scrolly").animate({scrollLeft: "-="+850});
+    });
+    $(".scrolly-right").click(function(){
+        $("#scrolly").animate({scrollLeft: "+="+850});
+    });        
+});
+</script>
+
+          <script>
+          $('.thumbnails img').click(function(){
+
+ // Grab img.thumb class src attribute
+ // NOTE: ALL img tags must have use this class, 
+ // otherwise you can't click back to the first image.
+
+ var thumbSrc = $('.properties').attr('src');
+
+ // Grab img#largeImage src attribute
+ var largeSrc = $('#largeImage').attr('src');
+
+  // Use variables to replace src instead of relying on file names.
+  $('#largeImage').attr('src',$(this).attr('src').replace(thumbSrc,largeSrc));
+  $('#description').html($(this).attr('alt'));
+
+});
+</script>
+
+</body>
+    
+</html>

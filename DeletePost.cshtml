@@ -1,0 +1,12 @@
+﻿@{
+var delId="";    
+var db=Database.Open("StarterSite"); 
+    if(IsPost)
+    {
+    delId=Request.Form["delPost"];
+    var deleteCommand = "DELETE FROM PROPERTY WHERE ID = @0";
+	db.Execute(deleteCommand, delId);
+	Response.Redirect("~/Timeline.cshtml");
+    }
+}
+
